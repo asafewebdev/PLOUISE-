@@ -168,7 +168,6 @@
 
   .bundle-msg{margin-top:14px;font-size:13.5px;font-weight:600;color:#241a17;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center}
   .bundle-msg .save{font-weight:700;color:#241a17}
-  .bundle-msg .extra{background:var(--lime);color:#3a4d05;padding:5px 14px;border-radius:16px;font-weight:800;font-size:12px;letter-spacing:.01em}
   .bundle-msg.locked{color:#a06a80}
   @media(min-width:600px){.bundle-msg{font-size:14px}}
 
@@ -443,7 +442,7 @@
       </div>
 
       <div class="bundle-msg" id="bundleMsg">
-        <span class="save">You save £8.00 vs buying separately 🎉 ·</span><span class="extra">WORTH £25.00</span>
+        <span class="save">You save £8.00 vs buying separately 🎉</span>
       </div>
 
       <button class="addbag" id="addBag" onclick="onAddBag()">Add to bag · £17.00</button>
@@ -699,7 +698,7 @@ function renderPicker(){
   const total=UNIT*pickQty;
   document.getElementById('grandTotal').textContent=money(total);
   const save=(WORTH-UNIT)*pickQty;
-  document.getElementById('bundleMsg').innerHTML=`<span class="save">You save ${money(save)} vs buying separately 🎉 ·</span><span class="extra">WORTH ${money(WORTH*pickQty)}</span>`;
+  document.getElementById('bundleMsg').innerHTML=`<span class="save">You save ${money(save)} vs buying separately 🎉</span>`;
   document.getElementById('addBag').textContent=`Add to bag · ${money(total)}`;
 }
 
