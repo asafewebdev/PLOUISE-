@@ -694,7 +694,7 @@ function qtyDec(){ pickQty=Math.max(1,pickQty-1); renderPicker(); }
 function renderPicker(){
   document.getElementById('qtyVal').textContent=pickQty;
   const f=FLAVOURS[selectedFlavour];
-  document.getElementById('selThumbs').innerHTML=`<div class="sel-thumb"><div class="stimg"><img src="${f.img}" alt=""></div></div><span class="sel-empty" style="margin-left:2px">${f.n} · ${f.blurb}</span>`;
+  document.getElementById('selThumbs').innerHTML=`<div class="sel-thumb"><div class="stimg"><img src="${f.img}" alt="${f.n}"></div></div>`;
   const total=UNIT*pickQty;
   document.getElementById('grandTotal').textContent=money(total);
   const save=(WORTH-UNIT)*pickQty;
