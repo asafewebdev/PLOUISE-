@@ -1,0 +1,12 @@
+{
+  "name": "plouise-treat-trio-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page estatica, single file, clone da pagina The Bad Bitch Treat Trio (plouise.co.uk).",
+  "scripts": {
+    "dev": "http-server . -p 5501 -o -c-1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
