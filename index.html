@@ -424,7 +424,7 @@
       <h1 class="ptitle">The Bad Bitch Treat Trio</h1>
       <div class="price-row"><span class="now">£17.00</span><span class="alt" style="text-decoration:line-through">Worth £25.00</span></div>
 
-      <div class="opt-label"><span id="optCountLbl">6</span> Flavours — pick one</div>
+      <div class="opt-label"><span id="optCountLbl">6</span> Flavours · pick one</div>
       <div class="opts-box">
         <div class="opts" id="opts"></div>
       </div>
@@ -454,32 +454,32 @@
         <div class="acc open">
           <button onclick="toggleAcc(this)">Description <span class="chev">⌄</span></button>
           <div class="body"><div class="inner">
-            <p style="margin-bottom:10px">Step into a world of seriously sweet self-care with the P.Louise Bad Bitch Treat Trio. Every bundle brings together three P.Louise favourites — a Bad Bitch Energy Lip Duo, an Obsessed For Less Skincare Bundle and a Bad Bitch Body Mist — carefully paired around one irresistible flavour theme.</p>
-            <p style="margin-bottom:10px">From nostalgic sweet-shop favourites and freshly baked treats to juicy fruit combinations, each Treat Trio serves up its own delicious beauty experience. Whether you're treating yourself, discovering a new flavour obsession or hunting for the ultimate P.Louise gift, just pick your flavour and get ready to indulge.</p>
+            <p style="margin-bottom:10px">Step into a world of seriously sweet self care with the P.Louise Bad Bitch Treat Trio. Every bundle brings together three P.Louise favourites: a Bad Bitch Energy Lip Duo, an Obsessed For Less Skincare Bundle and a Bad Bitch Body Mist, carefully paired around one irresistible flavour theme.</p>
+            <p style="margin-bottom:10px">From nostalgic sweet shop favourites and freshly baked treats to juicy fruit combinations, each Treat Trio serves up its own delicious beauty experience. Whether you're treating yourself, discovering a new flavour obsession or hunting for the ultimate P.Louise gift, just pick your flavour and get ready to indulge.</p>
             <p style="margin-bottom:6px"><strong>Each Bad Bitch Treat Trio includes:</strong></p>
             <ul>
               <li>1 × Bad Bitch Energy Lip Duo</li>
               <li>1 × Obsessed For Less Skincare Bundle</li>
               <li>1 × Bad Bitch Body Mist</li>
             </ul>
-            <p style="font-weight:700;margin-top:10px">Three full-size treats, one flavour story. Worth £25, yours for £17.</p>
+            <p style="font-weight:700;margin-top:10px">Three full size treats, one flavour story. Worth £25, yours for £17.</p>
           </div></div>
         </div>
         <div class="acc">
           <button onclick="toggleAcc(this)">Ingredients <span class="chev">⌄</span></button>
           <div class="body"><div class="inner">
-            <p style="margin-bottom:10px">Full ingredient lists vary by flavour. Each Treat Trio is made up of four product types — here's what's typically inside:</p>
+            <p style="margin-bottom:10px">Full ingredient lists vary by flavour. Each Treat Trio is made up of four product types, here's what's typically inside:</p>
             <p style="margin-bottom:6px"><strong>Protect Your Pout (Lip Duo):</strong> Ethylhexyl Palmitate, Polyisobutene, Hydrogenated Styrene/Isoprene Copolymer, Caprylic/Capric Triglyceride, Microcrystalline Wax, Vitamin E, Iron Oxides.</p>
             <p style="margin-bottom:6px"><strong>Lip Oil:</strong> Polyisobutene, Ethylhexyl Palmitate, Caprylic/Capric Triglyceride, Hydrogenated Polyisobutene, Silica, Fragrance, Tocopheryl Acetate, Meadowfoam Seed Oil.</p>
             <p style="margin-bottom:6px"><strong>Moisturiser:</strong> Water, Glycerin, Butylene Glycol, Dimethicone, Shea Butter, Squalane, Fragrance, Tocopheryl Acetate, Lactobacillus/Soymilk Ferment Filtrate.</p>
             <p style="margin-bottom:6px"><strong>Foaming Cleanser:</strong> Water, Glycerin, Potassium Cocoyl Glycinate, Decyl Glucoside, Fragrance, Phenoxyethanol, botanical extracts.</p>
-            <p><strong>Body Mist:</strong> Alcohol, Fragrance, Water, BHT, Linalool, Hexyl Cinnamal, Limonene. Cruelty-free and formulated for everyday wear — refer to individual packaging for the complete INCI list.</p>
+            <p><strong>Body Mist:</strong> Alcohol, Fragrance, Water, BHT, Linalool, Hexyl Cinnamal, Limonene. Cruelty free and formulated for everyday wear, refer to individual packaging for the complete INCI list.</p>
           </div></div>
         </div>
         <div class="acc">
           <button onclick="toggleAcc(this)">Delivery information <span class="chev">⌄</span></button>
           <div class="body"><div class="inner">
-            <p style="margin-bottom:10px">Standard delivery: £1, arrives in 3-5 working days.</p>
+            <p style="margin-bottom:10px">Standard delivery: £1, arrives in 3 to 5 working days.</p>
             <p style="margin-bottom:10px">Next day delivery: £5.99, order by 7pm on weekdays.</p>
             <p style="margin-bottom:10px">Free next day delivery on orders over £75.</p>
             <p>🎁 Spend £50+ and get a complimentary Crystal Bad Bitch Energy Lip Duo in Raspberry Tart, while stocks last.</p>
@@ -586,12 +586,12 @@ const WORTH = 25.00;     // stated bundle value ("Worth £25")
 /* g = index into GALLERY of this flavour's photo, so picking a flavour
    jumps the main gallery straight to its packaging shot. */
 const FLAVOURS = [
- {n:"Sweet Treats", i:"3_for_20_N3_Shopify.jpg?v=1786971978", g:6, blurb:"Donut & Candy Bears — a sugary trio for the ultimate sweet tooth."},
- {n:"Fruit Crush", i:"3for_20V2Shopify.jpg?v=1786106709", g:0, blurb:"Raspberry, Winter Apple & Watermelon — fresh, juicy and fruity."},
- {n:"Summer Fruits", i:"3_for_20_N2_Shopify.jpg?v=1786971978", g:3, blurb:"Watermelon, Candy Bears & Blue Raspberry — candy-coated summer vibes."},
- {n:"Baked & Boujee", i:"3for_20V4Shopify.jpg?v=1786106709", g:1, blurb:"Birthday Cake, Hot Toddy & Donut — warm, indulgent bakery treats."},
- {n:"Choc Berry Bliss", i:"3for_20V5Shopify.jpg?v=1786106709", g:2, blurb:"Strawberry, Chocolate Covered Strawberries & Pineapple — sweet & fruity."},
- {n:"Party Favor", i:"3_for_20_N1_Shopify_4c7346dd-6c83-4a32-9c14-f80dcbbe22f0.jpg?v=1786972054", g:4, blurb:"Parma Lilac, Birthday Cake & Signature Scent — sweet but floral."}
+ {n:"Sweet Treats", i:"3_for_20_N3_Shopify.jpg?v=1786971978", g:6, blurb:"Donut & Candy Bears · a sugary trio for the ultimate sweet tooth."},
+ {n:"Fruit Crush", i:"3for_20V2Shopify.jpg?v=1786106709", g:0, blurb:"Raspberry, Winter Apple & Watermelon · fresh, juicy and fruity."},
+ {n:"Summer Fruits", i:"3_for_20_N2_Shopify.jpg?v=1786971978", g:3, blurb:"Watermelon, Candy Bears & Blue Raspberry · candy coated summer vibes."},
+ {n:"Baked & Boujee", i:"3for_20V4Shopify.jpg?v=1786106709", g:1, blurb:"Birthday Cake, Hot Toddy & Donut · warm, indulgent bakery treats."},
+ {n:"Choc Berry Bliss", i:"3for_20V5Shopify.jpg?v=1786106709", g:2, blurb:"Strawberry, Chocolate Covered Strawberries & Pineapple · sweet & fruity."},
+ {n:"Party Favor", i:"3_for_20_N1_Shopify_4c7346dd-6c83-4a32-9c14-f80dcbbe22f0.jpg?v=1786972054", g:4, blurb:"Parma Lilac, Birthday Cake & Signature Scent · sweet but floral."}
 ];
 FLAVOURS.forEach(f=>f.img=TRIO_CDN+f.i);
 let selectedFlavour = 5; // Party Favor — matches the linked product variant
@@ -695,7 +695,7 @@ function qtyDec(){ pickQty=Math.max(1,pickQty-1); renderPicker(); }
 function renderPicker(){
   document.getElementById('qtyVal').textContent=pickQty;
   const f=FLAVOURS[selectedFlavour];
-  document.getElementById('selThumbs').innerHTML=`<div class="sel-thumb"><div class="stimg"><img src="${f.img}" alt=""></div></div><span class="sel-empty" style="margin-left:2px">${f.n} — ${f.blurb}</span>`;
+  document.getElementById('selThumbs').innerHTML=`<div class="sel-thumb"><div class="stimg"><img src="${f.img}" alt=""></div></div><span class="sel-empty" style="margin-left:2px">${f.n} · ${f.blurb}</span>`;
   const total=UNIT*pickQty;
   document.getElementById('grandTotal').textContent=money(total);
   const save=(WORTH-UNIT)*pickQty;
@@ -731,7 +731,7 @@ function renderDrawer(){
       return `<div class="citem">
         <div class="cimg"><img src="${f.img}" alt=""></div>
         <div>
-          <div class="cname">The Bad Bitch Treat Trio — ${f.n}</div>
+          <div class="cname">The Bad Bitch Treat Trio · ${f.n}</div>
           <div class="cprice">${money(UNIT)} each</div>
           <div class="cstep">
             <button onclick="cartDec(${idx})">−</button>
@@ -763,7 +763,7 @@ function onAddBag(){
   openCart();
   toast(`Added ${pickQty} × ${FLAVOURS[selectedFlavour].n} to your bag`);
 }
-function checkout(){ toast('This is a demo — checkout is not connected'); }
+function checkout(){ toast('This is a demo, checkout is not connected'); }
 
 /* ---------- Accordions ---------- */
 function toggleAcc(btn){btn.parentElement.classList.toggle('open');}
@@ -777,12 +777,12 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
    are written to match the real feedback themes — "fab price", "very good
    value" — one per flavour). ---------- */
 const REVIEWS=[
- {name:"Chloe M.",verified:true,date:"20/08/2026",stars:5,text:"Fab price for what you get, honestly feels like way more than £17 worth of product.",item:"Party Favor",age:"18 - 24",skin:"Combination",media:null,video:false},
- {name:"Megan A.",verified:true,date:"14/08/2026",stars:5,text:"Very good value — the lip duo alone is worth it, the body mist is just a bonus.",item:"Fruit Crush",age:"25 - 34",skin:"Oily",media:null,video:false},
- {name:"Sophie K.",verified:true,date:"09/08/2026",stars:5,text:"Loved getting three full-size treats for the price of one, quality is spot on.",item:"Baked & Boujee",age:"25 - 34",skin:"Normal",media:null,video:false},
- {name:"Ellie R.",verified:true,date:"03/08/2026",stars:5,text:"Bought this as a gift and nearly kept it for myself instead, smells so good.",item:"Choc Berry Bliss",age:"35 - 44",skin:"Dry",media:null,video:false},
- {name:"Jodie T.",verified:true,date:"29/07/2026",stars:5,text:"Such a good complete set, all three pieces actually get used unlike some bundles.",item:"Summer Fruits",age:"18 - 24",skin:"Combination",media:null,video:false},
- {name:"Amber D.",verified:true,date:"22/07/2026",stars:5,text:"Sweet Treats is such a good combo, already eyeing up the other flavours.",item:"Sweet Treats",age:"25 - 34",skin:"Normal",media:null,video:false}
+ {name:"Chloe M.",verified:true,date:"20/08/2026",stars:5,text:"Fab price for what you get, honestly feels like way more than £17 worth of product.",item:"Party Favor",age:"18 to 24",skin:"Combination",media:null,video:false},
+ {name:"Megan A.",verified:true,date:"14/08/2026",stars:5,text:"Very good value, the lip duo alone is worth it, the body mist is just a bonus.",item:"Fruit Crush",age:"25 to 34",skin:"Oily",media:null,video:false},
+ {name:"Sophie K.",verified:true,date:"09/08/2026",stars:5,text:"Loved getting three full size treats for the price of one, quality is spot on.",item:"Baked & Boujee",age:"25 to 34",skin:"Normal",media:null,video:false},
+ {name:"Ellie R.",verified:true,date:"03/08/2026",stars:5,text:"Bought this as a gift and nearly kept it for myself instead, smells so good.",item:"Choc Berry Bliss",age:"35 to 44",skin:"Dry",media:null,video:false},
+ {name:"Jodie T.",verified:true,date:"29/07/2026",stars:5,text:"Such a good complete set, all three pieces actually get used unlike some bundles.",item:"Summer Fruits",age:"18 to 24",skin:"Combination",media:null,video:false},
+ {name:"Amber D.",verified:true,date:"22/07/2026",stars:5,text:"Sweet Treats is such a good combo, already eyeing up the other flavours.",item:"Sweet Treats",age:"25 to 34",skin:"Normal",media:null,video:false}
 ];
 
 /* ---------- Sort by ---------- */
