@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 for £18 Beauty Saver</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink-bg:#fbe4ea;
+    --pink-soft:#fdeef2;
+    --pink-mid:#f8c9d7;
+    --pink-deep:#f4a9bf;
+    --cream:#f6e7dc;
+    --brown:#4a3630;
+    --ink:#2c2320;
+    --green:#25c274;
+    --green-dark:#149b58;
+    --lime:#c7ef4f;
+    --gold:#c99a3f;
+    --muted:#8a7d78;
+  }
+  /* Mobile-first: every rule below is written for a phone viewport first,
+     then progressively enhanced with min-width media queries for
+     larger screens. Most traffic here comes from mobile ad placements. */
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Poppins',sans-serif;color:var(--ink);background:#fff;line-height:1.5}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+  @media(min-width:640px){.wrap{padding:0 20px}}
+
+  /* Announcement bar — one message on phones, all three from tablet up */
+  .announce{background:var(--brown);color:#f5e9e2;font-size:11.5px;font-weight:600;letter-spacing:.2px}
+  .announce .wrap{display:flex;justify-content:center;gap:20px;padding:9px 16px;text-align:center}
+  .announce span{opacity:.95}
+  .announce span:not(:first-child){display:none}
+  @media(min-width:640px){
+    .announce{font-size:13px;letter-spacing:.3px}
+    .announce .wrap{justify-content:space-around;padding:11px 20px;flex-wrap:wrap}
+    .announce span:not(:first-child){display:inline}
+  }
+
+  /* Header */
+  header{background:linear-gradient(#f7ebe2,#f4e4d9);position:sticky;top:0;z-index:40;border-bottom:1px solid #e6d6c9}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+  .brandmark{font-weight:800;font-size:18px;letter-spacing:2px;color:#cbb6a6;display:flex;align-items:center;gap:8px}
+  .brandmark .dot{width:9px;height:9px;border-radius:50%;background:#d9c4b4}
+  .icons{display:flex;align-items:center;gap:16px}
+  .icons .ico{width:22px;height:22px;color:#4a3630;position:relative}
+  .icons .cart-btn{cursor:pointer;background:none;border:none;padding:0;color:#4a3630}
+  .icons .deco{opacity:.9}
+  .cart-count{position:absolute;top:-8px;right:-10px;background:var(--green);color:#fff;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;transform:scale(0);transition:transform .18s}
+  .cart-count.show{transform:scale(1)}
+  nav.mainnav{display:flex;justify-content:flex-start;gap:20px;padding:2px 0 12px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;font-size:13.5px;font-weight:600;color:#4a3630}
+  nav.mainnav::-webkit-scrollbar{display:none}
+  nav.mainnav span{cursor:default;display:flex;align-items:center;gap:5px;white-space:nowrap}
+  @media(min-width:640px){
+    .topbar{padding:16px 0}
+    .brandmark{font-size:22px;letter-spacing:4px}
+    .brandmark .dot{width:10px;height:10px}
+    .icons{gap:22px}
+    .icons .ico{width:24px;height:24px}
+    nav.mainnav{justify-content:center;gap:30px;padding:6px 0 16px;flex-wrap:wrap;overflow-x:visible;font-size:15px}
+  }
+
+  /* Product section */
+  .product{background:var(--pink-bg);padding:20px 0 40px}
+  .pgrid{display:grid;grid-template-columns:1fr;gap:22px;align-items:start}
+  @media(min-width:900px){.product{padding:34px 0 60px}.pgrid{grid-template-columns:1fr 1fr;gap:44px}}
+
+  /* Gallery */
+  .gallery{position:static;top:auto}
+  @media(min-width:900px){.gallery{position:sticky;top:150px}}
+  .main-media{position:relative;border-radius:16px;overflow:hidden;background:#f4cdd8;aspect-ratio:1/1}
+  .gtrack{display:flex;height:100%;width:100%;touch-action:pan-y;will-change:transform;cursor:grab}
+  .gtrack.dragging{cursor:grabbing}
+  .gslide{flex:0 0 100%;width:100%;height:100%}
+  .gslide img{width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;pointer-events:none}
+  .badge-tl{position:absolute;top:12px;left:12px;display:flex;gap:6px;z-index:3}
+  .badge-tl b{background:#c9a27f;color:#fff;font-size:11px;font-weight:700;padding:6px 12px;border-radius:20px}
+  .badge-tl em{background:#fff;color:#4a3630;font-style:normal;font-size:11px;font-weight:700;padding:6px 12px;border-radius:20px}
+  .rate-bl{position:absolute;bottom:12px;left:12px;z-index:3;display:flex;align-items:center;gap:6px;color:#5a4038;font-weight:700;font-size:13px;text-shadow:0 1px 4px rgba(255,255,255,.6)}
+  .g-arrow{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3;border:1px solid rgba(255,255,255,.6);color:#3a2e2a;box-shadow:0 4px 14px rgba(40,25,30,.16);transition:background .15s,transform .15s}
+  .g-arrow svg{width:18px;height:18px}
+  .g-arrow:hover{background:rgba(255,255,255,.85)}
+  .g-arrow:active{transform:translateY(-50%) scale(.92)}
+  .g-arrow.left{left:10px}.g-arrow.right{right:10px}
+  .thumbs{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .thumbs img{width:56px;height:56px;object-fit:cover;border-radius:12px;cursor:pointer;border:2px solid transparent;background:#f4cdd8}
+  .thumbs img.active{border-color:#e07898}
+  @media(min-width:600px){
+    .main-media{border-radius:22px}
+    .badge-tl{top:16px;left:16px;gap:8px}
+    .badge-tl b,.badge-tl em{font-size:12px;padding:7px 14px}
+    .rate-bl{bottom:14px;left:16px;font-size:14px}
+    .g-arrow{width:42px;height:42px}
+    .g-arrow svg{width:20px;height:20px}
+    .g-arrow.left{left:14px}.g-arrow.right{right:14px}
+    .thumbs{gap:10px;margin-top:14px}
+    .thumbs img{width:70px;height:70px;border-radius:14px}
+  }
+
+  /* Product info */
+  .stars-line{display:flex;align-items:center;gap:8px;color:var(--gold);font-size:14px;font-weight:600;margin-bottom:8px}
+  .stars-line .cnt{color:var(--muted);font-weight:500}
+  h1.ptitle{font-size:28px;font-weight:800;line-height:1.08;color:#241a17;margin-bottom:12px;letter-spacing:-.3px}
+  .price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+  .price-row .now{font-size:22px;font-weight:800}
+  .price-row .alt{color:#c07a94;font-weight:600;font-size:14px}
+  .opt-label{font-weight:700;font-size:14px;margin-bottom:10px}
+  @media(min-width:600px){
+    .stars-line{font-size:15px}
+    h1.ptitle{font-size:42px;margin-bottom:14px;letter-spacing:-.5px}
+    .price-row{margin-bottom:20px}
+    .price-row .now{font-size:24px}
+    .price-row .alt{font-size:15px}
+    .opt-label{font-size:15px;margin-bottom:12px}
+  }
+
+  /* Options grid */
+  .opts-box{background:#fff;border-radius:18px;padding:12px;max-height:420px;overflow-y:auto;box-shadow:0 6px 24px rgba(180,90,120,.10)}
+  .opts-box::-webkit-scrollbar{width:8px}
+  .opts-box::-webkit-scrollbar-thumb{background:#f0c3d1;border-radius:8px}
+  .opts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px 4px}
+  .opt{display:block;width:100%;border:none;background:none;border-radius:16px;padding:10px 4px 10px;text-align:center;transition:background .15s,opacity .15s;position:relative;font-family:inherit;cursor:pointer}
+  .opt.selected{background:#fdeef2}
+  .opt .circ{width:64px;height:64px;margin:0 auto;border-radius:50%;background:#fbe0e8;overflow:hidden;display:flex;align-items:center;justify-content:center;border:2px solid #fbe0e8;position:relative;cursor:pointer}
+  .opt.selected .circ{border-color:#f2a9c1}
+  .opt .circ img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+  .opt .oname{font-size:10.5px;font-weight:600;line-height:1.2;min-height:38px;color:#3a2e2a;padding:0 1px;margin-top:14px}
+  .opt.unavailable{cursor:not-allowed;opacity:.45}
+  .opt.unavailable .circ{filter:grayscale(60%);cursor:not-allowed}
+  .opt.unavailable .soldout{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:rgba(40,30,28,.55);border-radius:50%}
+  .opt .stepper{position:absolute;left:50%;bottom:-10px;transform:translateX(-50%) scale(0);opacity:0;display:inline-flex;align-items:center;gap:0;background:var(--pink-deep);border-radius:20px;overflow:hidden;user-select:none;box-shadow:0 3px 8px rgba(180,90,120,.35);transition:transform .15s,opacity .15s;z-index:2}
+  .opt.selected .stepper{transform:translateX(-50%) scale(1);opacity:1}
+  .opt .stepper button{border:none;background:none;width:22px;height:22px;font-size:14px;font-weight:800;color:#fff;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center}
+  .opt .stepper button:active{background:rgba(0,0,0,.12)}
+  .opt .stepper .qv{min-width:16px;text-align:center;font-weight:800;font-size:12px;color:#fff}
+  @media(min-width:600px){
+    .opts-box{border-radius:20px;padding:14px}
+    .opts{gap:8px 6px}
+    .opt{padding:10px 6px 12px}
+    .opt .circ{width:88px;height:88px}
+    .opt .oname{font-size:12px;min-height:46px;margin-top:18px}
+    .opt .stepper{bottom:-12px}
+    .opt .stepper button{width:26px;height:26px;font-size:16px}
+    .opt .stepper .qv{min-width:20px;font-size:13px}
+  }
+
+  /* Selected preview + total */
+  .sel-summary{display:flex;align-items:center;justify-content:space-between;margin-top:20px;gap:14px;flex-wrap:wrap}
+  .sel-thumbs{display:flex;gap:8px;flex-wrap:wrap}
+  .sel-thumb{position:relative;width:48px;height:48px}
+  .sel-thumb .stimg{width:100%;height:100%;border-radius:50%;overflow:hidden;background:#f4cdd8;border:2px solid #fff;box-shadow:0 3px 10px rgba(60,30,45,.25)}
+  .sel-thumb img{width:100%;height:100%;object-fit:cover}
+  .sel-thumb .x{position:absolute;top:-8px;right:-8px;width:20px;height:20px;border-radius:50%;background:#3d2438;color:#fff;border:2px solid #fff;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;box-shadow:0 2px 6px rgba(40,25,30,.25)}
+  .sel-empty{color:#b98ea0;font-weight:600;font-size:13px}
+  .grand{font-size:26px;font-weight:800;color:#241a17}
+  @media(min-width:600px){
+    .sel-summary{margin-top:22px;gap:16px}
+    .sel-thumb{width:52px;height:52px}
+    .sel-empty{font-size:14px}
+    .grand{font-size:30px}
+  }
+
+  .bundle-msg{margin-top:14px;font-size:13.5px;font-weight:600;color:#241a17;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center}
+  .bundle-msg .save{font-weight:700;color:#241a17}
+  .bundle-msg .extra{background:var(--lime);color:#3a4d05;padding:5px 14px;border-radius:16px;font-weight:800;font-size:12px;letter-spacing:.01em}
+  .bundle-msg.locked{color:#a06a80}
+  @media(min-width:600px){.bundle-msg{font-size:14px}}
+
+  .addbag{margin-top:16px;width:100%;background:var(--green);color:#fff;border:none;border-radius:30px;padding:18px;font-size:16.5px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 8px 20px rgba(37,194,116,.35);transition:filter .15s,transform .05s}
+  .addbag:hover{filter:brightness(1.03)}
+  .addbag:active{transform:translateY(1px)}
+  .addbag:disabled{background:#e7b9c8;box-shadow:none;cursor:not-allowed;color:#fff}
+  @media(min-width:600px){.addbag{font-size:17px}}
+
+  /* Accordions */
+  .accs{margin-top:24px;border-top:1px solid #f0c3d1}
+  .acc{border-bottom:1px solid #f0c3d1}
+  .acc>button{width:100%;background:none;border:none;text-align:left;padding:16px 2px;font-size:15px;font-weight:700;font-family:inherit;color:#241a17;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .acc .body{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:13.5px;color:#4a3e3a}
+  .acc .body .inner{padding:0 2px 18px}
+  .acc.open .body{max-height:900px}
+  .acc .chev{transition:transform .3s;flex-shrink:0}
+  .acc.open .chev{transform:rotate(180deg)}
+  .acc ul{margin:8px 0 0 18px}
+  @media(min-width:600px){
+    .accs{margin-top:26px}
+    .acc>button{padding:18px 4px;font-size:16px}
+    .acc .body{font-size:14px}
+    .acc .body .inner{padding:0 4px 18px}
+  }
+
+  /* Reviews */
+  .reviews{background:#fff;padding:36px 0}
+  .rev-head{text-align:center;margin-bottom:26px}
+  .rev-star-big{display:inline-flex;align-items:center;gap:10px;font-size:38px;font-weight:800;color:#241a17}
+  .rev-star-big .s{color:var(--gold);font-size:32px}
+  .rev-count{font-size:17px;font-weight:600;margin-top:6px}
+  .dist{max-width:340px;margin:20px auto 0}
+  .dist-row{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:12px}
+  .dist-row .rs{color:var(--gold);letter-spacing:1px;width:82px;font-size:12px}
+  .bar{flex:1;height:9px;background:#eee;border-radius:6px;overflow:hidden}
+  .bar>i{display:block;height:100%;background:#8a8a8a;border-radius:6px}
+  .dist-row .n{width:30px;color:var(--muted);text-align:right}
+  @media(min-width:600px){
+    .reviews{padding:56px 0}
+    .rev-head{margin-bottom:30px}
+    .rev-star-big{gap:12px;font-size:52px}
+    .rev-star-big .s{font-size:44px}
+    .rev-count{font-size:20px}
+    .dist{max-width:420px;margin:24px auto 0}
+    .dist-row{gap:12px;font-size:13px}
+    .dist-row .rs{width:96px;font-size:13px}
+    .dist-row .n{width:34px}
+  }
+
+  /* Sort by dropdown */
+  .rev-toolbar{max-width:1040px;margin:0 auto;display:flex;justify-content:flex-end}
+  .sort{position:relative}
+  .sort-btn{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #e7dcd6;border-radius:20px;padding:9px 14px;font-family:inherit;font-size:13px;font-weight:600;color:#241a17;cursor:pointer}
+  .sort-btn svg{width:14px;height:14px;color:var(--muted)}
+  .sort-btn #sortActiveLabel{color:var(--muted);font-weight:500}
+  .sort-menu{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(40,25,30,.18);padding:14px 16px;min-width:200px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .15s,transform .15s;z-index:30}
+  .sort-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
+  .sort-menu__title{font-weight:800;font-size:15px;margin-bottom:10px;color:#241a17}
+  .sort-menu button{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;font-family:inherit;font-size:14px;color:#241a17;padding:9px 0;cursor:pointer;text-align:left}
+  .sort-menu button .tick{width:16px;height:16px;color:#241a17;opacity:0;flex-shrink:0}
+  .sort-menu button.active .tick{opacity:1}
+
+  .rev-list{max-width:1040px;margin:28px auto 0;display:flex;flex-direction:column;gap:16px}
+  .rev-card{border:none;border-radius:18px;padding:18px;display:grid;grid-template-columns:1fr;gap:14px;text-align:left;background:#fff;font-family:inherit;cursor:pointer;box-shadow:0 2px 14px rgba(60,40,45,.08);transition:box-shadow .15s,transform .1s;width:100%}
+  .rev-card:hover{box-shadow:0 8px 24px rgba(60,40,45,.14);transform:translateY(-1px)}
+  .rev-card .rev-media{order:-1;aspect-ratio:16/9}
+  .rev-name{font-weight:700;font-size:15.5px;display:flex;align-items:center;gap:6px}
+  .verified{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:500;color:#3a2e2a}
+  .verified svg{width:14px;height:14px}
+  .rev-date{font-size:12px;color:var(--muted);margin:3px 0 6px}
+  .rev-stars{color:var(--gold);letter-spacing:2px;font-size:14px;margin-bottom:8px}
+  .rev-text{font-size:13.5px;color:#33292a;line-height:1.55}
+  .rev-text mark{background:#fbdfa8;color:inherit;padding:1px 3px;border-radius:3px}
+  .rev-item{font-size:12px;color:var(--muted);margin-top:10px}
+  .rev-item b{color:#241a17;display:block;font-weight:600;margin-top:2px}
+  .rev-media{border-radius:14px;overflow:hidden;background:#f2d7de;position:relative}
+  .rev-media img{width:100%;height:100%;object-fit:cover}
+  .rev-media .play{position:absolute;inset:0;margin:auto;width:46px;height:46px;border:3px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px}
+  .showmore{display:block;margin:28px auto 0;background:#fff;border:1px solid #ddd;border-radius:26px;padding:12px 26px;font-weight:600;font-family:inherit;cursor:pointer}
+  .showmore:hover{background:#fdf3f6}
+  @media(min-width:640px){
+    .rev-list{margin:36px auto 0;gap:20px}
+    .rev-card:not(.no-media){grid-template-columns:1fr 230px}
+    .rev-card{padding:24px;gap:22px;border-radius:20px}
+    .rev-card .rev-media{order:0;aspect-ratio:1/1}
+    .rev-name{font-size:16px}
+    .rev-text{font-size:14px}
+    .showmore{margin:34px auto 0;padding:13px 30px}
+  }
+
+  /* Review detail modal */
+  .rev-modal-overlay{position:fixed;inset:0;background:rgba(35,24,22,.6);display:flex;align-items:center;justify-content:center;z-index:90;opacity:0;visibility:hidden;transition:opacity .2s;padding:14px}
+  .rev-modal-overlay.open{opacity:1;visibility:visible}
+  .rev-modal{position:relative;background:#fff;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1fr;max-width:900px;width:100%;max-height:92vh;overflow-y:auto}
+  .rev-modal.no-media{max-width:440px}
+  .rm-close{position:absolute;top:12px;left:12px;width:34px;height:34px;border-radius:50%;background:rgba(40,30,28,.55);color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;line-height:1}
+  .rm-media{background:#f2d7de;min-height:200px}
+  .rm-media img{width:100%;height:100%;object-fit:cover;display:block}
+  .rm-body{padding:24px 20px 22px;overflow-y:auto}
+  .rev-modal.no-media .rm-body{padding-top:54px}
+  .rm-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:6px}
+  .rm-name{font-size:18px;font-weight:800}
+  .rm-date{font-size:12px;color:var(--muted);margin-top:4px}
+  .rm-stars{color:var(--gold);letter-spacing:2px;font-size:15px;margin:8px 0 14px}
+  .rm-text{font-size:14px;line-height:1.6;color:#33292a;margin-bottom:20px}
+  .rm-field{margin-bottom:14px}
+  .rm-field .fl{font-size:12px;color:var(--muted);margin-bottom:6px}
+  .rm-field .fv{font-weight:700;font-size:14px}
+  .rm-pill{display:inline-block;background:#f4ece6;border-radius:8px;padding:8px 14px;font-weight:600;font-size:13px}
+  @media(min-width:700px){
+    .rev-modal-overlay{padding:20px}
+    .rev-modal{max-height:88vh}
+    .rev-modal:not(.no-media){grid-template-columns:1fr 1fr;overflow-y:visible}
+    .rm-close{top:14px;left:14px;width:36px;height:36px}
+    .rm-media{min-height:260px}
+    .rm-body{padding:30px 26px 26px}
+    .rm-name{font-size:19px}
+    .rm-stars{font-size:16px;margin:8px 0 16px}
+    .rm-text{font-size:14.5px;margin-bottom:22px}
+    .rm-field{margin-bottom:16px}
+  }
+
+  /* Footer */
+  footer{background:#f7e7dc;padding:32px 0 22px}
+  .fgrid{display:grid;grid-template-columns:1fr;gap:26px}
+  footer h4{font-size:14.5px;font-weight:700;margin-bottom:12px;color:#3a2e2a}
+  footer ul{list-style:none;font-size:13.5px;color:#5a4d48}
+  footer li{margin:8px 0;cursor:default}
+  .sub{display:flex;gap:8px;margin-top:12px;max-width:320px}
+  .sub input{flex:1;border:1px solid #d9c4b4;border-radius:8px;padding:11px;font-family:inherit;background:#fff;min-width:0}
+  .sub button{background:#241a17;color:#fff;border:none;border-radius:8px;padding:0 18px;font-weight:600;font-family:inherit;cursor:default}
+  .fbottom{text-align:center;color:#9a8a82;font-size:12px;margin-top:28px}
+  @media(min-width:520px){.fgrid{grid-template-columns:1fr 1fr;gap:28px}}
+  @media(min-width:900px){
+    footer{padding:46px 0 26px}
+    .fgrid{grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+    footer h4{font-size:15px;margin-bottom:14px}
+    footer ul{font-size:14px}
+    .sub button{padding:0 20px}
+    .fbottom{margin-top:34px}
+  }
+
+  /* Cart drawer — full-screen sheet on phones, side panel from tablet up */
+  .overlay{position:fixed;inset:0;background:rgba(40,25,30,.45);opacity:0;visibility:hidden;transition:.25s;z-index:60}
+  .overlay.open{opacity:1;visibility:visible}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:100%;background:#fff;z-index:70;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.15)}
+  .drawer.open{transform:translateX(0)}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #f0e2da}
+  .drawer-head h3{font-size:18px;font-weight:800}
+  .drawer-head .close{background:none;border:none;font-size:24px;cursor:pointer;color:#4a3630;line-height:1}
+  .drawer-body{flex:1;overflow-y:auto;padding:8px 18px}
+  .cart-empty{text-align:center;color:var(--muted);padding:50px 10px;font-weight:500}
+  .citem{display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:center;padding:14px 0;border-bottom:1px solid #f4ebe6}
+  .citem .cimg{width:60px;height:60px;border-radius:12px;overflow:hidden;background:#f4cdd8}
+  .citem .cimg img{width:100%;height:100%;object-fit:cover}
+  .citem .cname{font-size:13px;font-weight:600;line-height:1.3}
+  .citem .cprice{font-size:13px;color:var(--muted);margin-top:3px}
+  .citem .cremove{background:none;border:none;color:#c98;font-size:12px;cursor:pointer;margin-top:6px;padding:0;text-decoration:underline}
+  .citem .cstep{display:inline-flex;align-items:center;background:#f7c9d7;border-radius:18px;overflow:hidden;margin-top:6px}
+  .citem .cstep button{border:none;background:none;width:26px;height:26px;font-size:15px;font-weight:700;cursor:pointer;color:#3a2e2a}
+  .citem .cstep .qv{min-width:22px;text-align:center;font-weight:700;font-size:13px}
+  .drawer-foot{border-top:1px solid #f0e2da;padding:16px 18px}
+  .drawer-foot .line{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;color:#5a4d48}
+  .drawer-foot .tot{display:flex;justify-content:space-between;font-size:19px;font-weight:800;margin:8px 0 4px}
+  .drawer-foot .savenote{font-size:12px;color:var(--green-dark);font-weight:700;margin-bottom:14px}
+  .checkout{width:100%;background:var(--green);color:#fff;border:none;border-radius:26px;padding:16px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer}
+  @media(min-width:480px){
+    .drawer{width:400px;max-width:92vw}
+    .drawer-head{padding:20px 22px}
+    .drawer-head h3{font-size:19px}
+    .drawer-body{padding:10px 22px}
+    .citem{grid-template-columns:66px 1fr auto;gap:12px}
+    .citem .cimg{width:66px;height:66px}
+    .drawer-foot{padding:20px 22px}
+    .drawer-foot .tot{font-size:20px}
+  }
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(30px);background:#241a17;color:#fff;padding:12px 20px;border-radius:30px;font-size:13.5px;font-weight:600;opacity:0;transition:.3s;z-index:80;pointer-events:none;max-width:calc(100vw - 32px);text-align:center}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media(min-width:600px){.toast{bottom:26px;padding:13px 22px;font-size:14px}}
+</style>
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="announce">
+  <div class="wrap">
+    <span>FREE UK DELIVERY OVER £30</span>
+    <span>MIX &amp; MATCH · ANY 3 FOR £18</span>
+    <span>NEW FLAVOURS JUST DROPPED</span>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="wrap">
+    <div class="topbar">
+      <div style="width:120px"></div>
+      <div class="brandmark"><span class="dot"></span>BEAUTY<span class="dot"></span></div>
+      <div class="icons">
+        <!-- decorative search -->
+        <span class="ico deco" title="Search" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </span>
+        <!-- decorative person -->
+        <span class="ico deco" title="Account" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </span>
+        <!-- functional cart -->
+        <button class="cart-btn ico" onclick="openCart()" title="Cart" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h13l-1.5 10.5a2 2 0 0 1-2 1.7H9.5a2 2 0 0 1-2-1.7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+    <nav class="mainnav">
+      <span>Makeup</span>
+      <span>Skincare &amp; Body</span>
+      <span>Bundles &amp; Gifting</span>
+      <span>Collections</span>
+      <span class="plain">New In</span>
+    </nav>
+  </div>
+</header>
+
+<!-- Product -->
+<section class="product">
+  <div class="wrap pgrid">
+    <!-- Gallery -->
+    <div class="gallery">
+      <div class="main-media">
+        <div class="badge-tl"><b>3 for £18</b><em>Choose any 3</em></div>
+        <button class="g-arrow left" onclick="galleryStep(-1)" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <button class="g-arrow right" onclick="galleryStep(1)" aria-label="Next image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <div class="gtrack" id="gTrack"></div>
+        <div class="rate-bl">★★★★★ 4.7 (104)</div>
+      </div>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+
+    <!-- Info -->
+    <div class="info">
+      <div class="stars-line">★★★★★ 4.7 <span class="cnt">(104)</span></div>
+      <h1 class="ptitle">3 for £18 Beauty Saver</h1>
+      <div class="price-row"><span class="now">£8.00</span><span class="alt">or 3 for £18.00</span></div>
+
+      <div class="opt-label"><span id="optCountLbl">40</span> Options</div>
+      <div class="opts-box">
+        <div class="opts" id="opts"></div>
+      </div>
+
+      <div class="sel-summary">
+        <div class="sel-thumbs" id="selThumbs"><span class="sel-empty">Pick your favourites to build your bundle</span></div>
+        <div class="grand" id="grandTotal">£0.00</div>
+      </div>
+
+      <div class="bundle-msg locked" id="bundleMsg">
+        Mix &amp; match — any 3 for £18.00
+      </div>
+
+      <button class="addbag" id="addBag" onclick="onAddBag()">Add to bag</button>
+
+      <!-- Accordions -->
+      <div class="accs">
+        <div class="acc open">
+          <button onclick="toggleAcc(this)">Description <span class="chev">⌄</span></button>
+          <div class="body"><div class="inner">
+            <p style="margin-bottom:10px">Your beauty favourites, your way. Choose any 3 for just £18 and create the perfect combination from our must-have makeup, skincare, bodycare and beauty essentials.</p>
+            <p style="margin-bottom:10px">From juicy lip duos and bestselling mascaras to glow-boosting skincare, body treats and iconic palettes, this is your chance to mix, match and save on the products you've been wanting to try.</p>
+            <p style="font-weight:700">3 products. £18. Endless combinations. Pick your favourites before they're gone!</p>
+          </div></div>
+        </div>
+        <div class="acc">
+          <button onclick="toggleAcc(this)">Ingredients <span class="chev">⌄</span></button>
+          <div class="body"><div class="inner">
+            <p>Full ingredient lists vary by product. Each item in your bundle is dermatologically considered, cruelty-free and formulated for everyday wear. Refer to the individual product for its complete INCI list.</p>
+          </div></div>
+        </div>
+        <div class="acc">
+          <button onclick="toggleAcc(this)">Delivery information <span class="chev">⌄</span></button>
+          <div class="body"><div class="inner">
+            <p>Free UK delivery over £30. Orders are dispatched within 1-2 working days and arrive within 2-4 working days.</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="rev-head">
+      <div class="rev-star-big"><span class="s">★</span>4.7</div>
+      <div class="rev-count">104 Reviews</div>
+      <div class="dist">
+        <div class="dist-row"><span class="rs">★★★★★</span><div class="bar"><i style="width:86%"></i></div><span class="n">(89)</span></div>
+        <div class="dist-row"><span class="rs">★★★★☆</span><div class="bar"><i style="width:7%"></i></div><span class="n">(7)</span></div>
+        <div class="dist-row"><span class="rs">★★★☆☆</span><div class="bar"><i style="width:4%"></i></div><span class="n">(4)</span></div>
+        <div class="dist-row"><span class="rs">★★☆☆☆</span><div class="bar"><i style="width:2%"></i></div><span class="n">(2)</span></div>
+        <div class="dist-row"><span class="rs">★☆☆☆☆</span><div class="bar"><i style="width:2%"></i></div><span class="n">(2)</span></div>
+      </div>
+    </div>
+
+    <div class="rev-toolbar">
+      <div class="sort" id="sortWrap">
+        <button type="button" class="sort-btn" id="sortBtn" onclick="toggleSortMenu()" aria-haspopup="true" aria-expanded="false">
+          Sort by <span id="sortActiveLabel">Featured</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="sort-menu" id="sortMenu">
+          <div class="sort-menu__title">Sort by</div>
+          <button type="button" data-sort="featured" onclick="setReviewSort('featured')">Featured<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></button>
+          <button type="button" data-sort="newest" onclick="setReviewSort('newest')">Newest<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></button>
+          <button type="button" data-sort="highest" onclick="setReviewSort('highest')">Highest Ratings<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></button>
+          <button type="button" data-sort="lowest" onclick="setReviewSort('lowest')">Lowest Ratings<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rev-list" id="revList"></div>
+    <button class="showmore" id="showMoreBtn" onclick="showMoreReviews()">Show more reviews</button>
+  </div>
+</section>
+
+<!-- Review detail modal -->
+<div class="rev-modal-overlay" id="revModalOverlay" onclick="if(event.target===this)closeReview()">
+  <div class="rev-modal" id="revModalBox"></div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <h4>Step inside the inner circle ✨</h4>
+        <p style="font-size:14px;color:#5a4d48">Get early access to new drops, flavours and offers.</p>
+        <div class="sub"><input type="email" placeholder="Your email"><button>Subscribe</button></div>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul><li>Makeup</li><li>Skincare &amp; Body</li><li>Bundles &amp; Gifting</li><li>New In</li></ul>
+      </div>
+      <div>
+        <h4>Customer Care</h4>
+        <ul><li>My Account</li><li>Delivery</li><li>Returns</li><li>Contact Us</li></ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul><li>T&amp;Cs</li><li>Privacy Policy</li><li>Cookie Policy</li><li>Accessibility</li></ul>
+      </div>
+    </div>
+    <div class="fbottom">© 2026 · Beauty Saver · All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- Cart drawer -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping cart">
+  <div class="drawer-head">
+    <h3>Your bag (<span id="drawerCount">0</span>)</h3>
+    <button class="close" onclick="closeCart()" aria-label="Close">×</button>
+  </div>
+  <div class="drawer-body" id="drawerBody">
+    <div class="cart-empty">Your bag is empty.<br>Add any products to get started.</div>
+  </div>
+  <div class="drawer-foot">
+    <div class="line"><span>Items</span><span id="footItems">0</span></div>
+    <div class="line"><span>Standard price</span><span id="footStd">£0.00</span></div>
+    <div class="tot"><span>Total</span><span id="footTotal">£0.00</span></div>
+    <div class="savenote" id="footSave"></div>
+    <button class="checkout" onclick="checkout()">Checkout</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- Data: 40 products ---------- */
+const CDN = "https://plouise.co.uk/cdn/shop/";
+const UNIT = 8.00;      // individual price
+const PRODUCTS = [
+ {n:"Bad Bitch Energy Lip Duo - Donut", i:"files/P.Louise-Bad-Bitch-Energy-Juice-Donut.png"},
+ {n:"The Cheek Of It Liquid Blush - Apricot Smoothie", i:"products/P.Louise-Cheek-Of-It-Liquid-Blush---Apricot-Smoothie.jpg"},
+ {n:"The Cheek Of It Liquid Blush - Oh So Spice", i:"files/The-Cheek-Of-It-Chilli-Chic.webp"},
+ {n:"Hand Cream - Spiced Maple", i:"files/A-Helping-Hand-Cream-Spiced-Maple_1.webp"},
+ {n:"Adventure Starts After Dark Palette", i:"files/208ad7b78cde4614a48289b0a3740006_tplv-tulkllf4y5-origin-jpeg.jpg"},
+ {n:"Bad Bitch Body Mist - Cereal Milk", i:"files/4c16d099d88f4ee7b43145f64022aa24_tplv-t5fjg24jzw-origin-jpeg.jpg", unavailable:true},
+ {n:"Bad Bitch Energy Lip Duo - Prosecco", i:"files/P.Louise-Bad-Bitch-Energy-Juice-Prosecco.jpg"},
+ {n:"Bad Bitch Energy Lip Duo - Birthday Cake", i:"files/P.Louise-Bad-Bitch-Energy-Birthday-Cake.webp"},
+ {n:"Better Now Babe Pink Repair Serum", i:"files/Better-Now-Babe-Pink-Barrier-Repair-Serum-Twilight-Tide.webp"},
+ {n:"Bed Ready Sleeping Mask - Fizzy Pop", i:"files/P.Louise-Bed-Ready---Fizzy-Pop.webp"},
+ {n:"Whipped Body Foam - Piece Of Cake", i:"files/P.Louise-Clean-Up-Your-Act-Body-Mousse---Piece-Of-Cake2.jpg"},
+ {n:"Glossy Balm Lipstick - Heartmade", i:"files/PLouise-Glow-Guide-Glossy-Balm-Lipstick-Heartmade.webp"},
+ {n:"Living For the Night Palette", i:"files/d6ccb2c3bcce47689ffa0ca853841376_tplv-t5fjg24jzw-origin-jpeg.jpg"},
+ {n:"Hair To The Throne Conditioner - Calorific", i:"files/HAIR-TO-THE-THRONE-CONDITIONER---CALORIFIC.webp"},
+ {n:"Eyeshadow Stick - Glow & Tell", i:"files/Lowkey-Lit-On-The-Down-Glow_0e973c99-bc93-4998-a89e-5ad73fd9d14f.jpg"},
+ {n:"Lights Out Primer Serum", i:"files/lightsout_13be95cb-3c77-47a8-a4b8-022dff6eacc3.jpg"},
+ {n:"Make It Melt Refill Pack - Mixed Fruit", i:"files/Make-It-Melt-Refill-Makeup-Remover-Wipes---Mixed-Fruit_a39bf07e-1de1-4ecb-b058-a193bee4ad39.png"},
+ {n:"Nighttime Nourish Water Essence", i:"files/P.Louise--Night-time-Nourish-Water-Essence_1.png"},
+ {n:"Pure Intentions Purify & Brightening Lotion", i:"files/P.Louise_Pure_Intentions_Purify_Brightening_Lotion_Twilight_Tide_922d88c5-16a0-40de-9113-a84d35f34eb3.jpg"},
+ {n:"Peach Perfection Palette", i:"files/P.Louise-PeachPerfection-Eyeshadow-Palette-Open_8b342cc8-c710-451e-87e1-69d384746f75.jpg"},
+ {n:"Bad Bitch Energy Lip Duo - Calorific", i:"files/P.Louise-Bad-Bitch-Energy-Lip-duo-Calorific_bae19903-e1c2-4e96-b082-e4f7628401de.png"},
+ {n:"Twilight Tone Toner", i:"files/P.Louise--Twilight-Tonic-Moisturising-Toner.webp"},
+ {n:"Soak Me Lip Oil - Fruity & Loopy", i:"files/PLouise-Soak-Me-Lip-Oil-Fruity-And-Loopy_e5218800-fa79-411f-a257-7dd0090bb4ac.webp"},
+ {n:"Body Scrub - Frosted Peppermint", i:"files/P.Louise-You-Scrub-Up-Well-Frosted-Peppermint_07edc315-24d1-45e5-9f71-21de3d9c4a63.webp"},
+ {n:"Melt Away Mist - Piece Of Cake", i:"files/P.Louise-Melt-Away---Piece-Of-Cake.webp"},
+ {n:"Soak Me Lip Oil - Cereal Milk", i:"files/PLouise-Soak-Me-Lip-Oil-Cereal-Milk.webp"},
+ {n:"Glisten To Your Heart Glitter Liner Set", i:"files/glistentoyourheart3_c46e08cf-379b-43db-b5da-60cc54166621.webp"},
+ {n:"Bronzer - Made To Shade", i:"files/ff2b8630c3fd4c6db56ee4dbbe42f4a1_tplv-t5fjg24jzw-origin-jpeg.jpg"},
+ {n:"All Over Body Glow - Up To Snow Good", i:"files/15c96613926a479a893f26d5911a77a2_tplv-t5fjg24jzw-origin-jpeg.jpg"},
+ {n:"In Love With Me Foaming Cleanser - Peach", i:"files/84c534dba4544b0da5e20b3cf311a7c6_tplv-t5fjg24jzw-origin-jpeg.jpg"},
+ {n:"Double Lip Oil - Strawberries & Cream", i:"files/8dfe7adfdab14ab58c467ea66a5c14c9_tplv-t5fjg24jzw-origin-jpeg_8267deb6-9149-4239-b427-50ff88092996.jpg"},
+ {n:"I'm So Jelly Makeup Remover - Peach", i:"files/P.Louise-Peach-I_m-So-Jelly.jpg"},
+ {n:"I'm So Jelly Makeup Remover - Watermelon", i:"files/P.Louise-Watermelon-I_m-So-Jelly_0f012066-7445-4dad-ae68-f451cdfccb84.jpg"},
+ {n:"Stay Shining Lip Oil - Put A Ring On It", i:"files/P.Louise-stay-shining-lip-oil-put-a-ring-on-it.png"},
+ {n:"Melt Away Mist - Calorific", i:"files/P.Louise-Melt-Away---Calorific.png"},
+ {n:"That's The Spot Pimple Patches - Mixed Fruit", i:"files/Thats-The-Spot-Pimple-Patches---Mixed-Fruit.jpg"},
+ {n:"Melt Away Mist - Fizzy Pop", i:"files/P.Louise-Melt-Away---Fizzy-Pop.png"},
+ {n:"What's The Scoop Scrub - Mixed Fruit", i:"files/P.Louise-Whats-The-Scoop-Stretch-Body-Scrub-Mixed-Fruit.jpg"},
+ {n:"The Cheek Of It Liquid Bronzer - Cocoa Cakes", i:"products/P.Louise-Cheek-Of-It-Bronzer-Cocoa-Cakes.png"},
+ {n:"Bedslime Routine Makeup Remover", i:"files/PLouise-Bedslime-Routine-Jelly_Makeup-Removing-Cleanser_13.png"}
+];
+PRODUCTS.forEach(p=>p.img=CDN+p.i);
+
+/* ---------- Gallery ---------- */
+const GALLERY = [
+ "files/8dfe7adfdab14ab58c467ea66a5c14c9_tplv-t5fjg24jzw-origin-jpeg.jpg",
+ "files/d6ccb2c3bcce47689ffa0ca853841376_tplv-t5fjg24jzw-origin-jpeg.jpg",
+ "files/P.Louise-Clean-Up-Your-Act-Body-Mousse---Piece-Of-Cake2.jpg",
+ "files/glistentoyourheart3_c46e08cf-379b-43db-b5da-60cc54166621.webp",
+ "files/84c534dba4544b0da5e20b3cf311a7c6_tplv-t5fjg24jzw-origin-jpeg.jpg",
+ "files/PLouise-Glow-Guide-Glossy-Balm-Lipstick-Heartmade.webp"
+].map(x=>CDN+x);
+/* Swipeable gallery: a flex track of real slides moved with translate3d.
+   While dragging, the track follows the finger 1:1 with transitions off
+   (pure transform, no layout work) so it never stutters; on release it
+   either completes the swipe or snaps back with one short transition. */
+let gIdx=0, gTrackEl=null, gWrapEl=null;
+let gDragging=false, gStartX=0, gDragX=0, gBaseX=0, gWidth=0;
+
+function initGallery(){
+  gTrackEl=document.getElementById('gTrack');
+  gWrapEl=gTrackEl.parentElement;
+  gTrackEl.innerHTML=GALLERY.map((u,k)=>`<div class="gslide"><img src="${u}" alt="Product photo ${k+1}" draggable="false"></div>`).join('');
+  measureGallery();
+  goToSlide(0,false);
+  gTrackEl.addEventListener('pointerdown', onGPointerDown);
+  gTrackEl.addEventListener('pointermove', onGPointerMove);
+  gTrackEl.addEventListener('pointerup', onGPointerUp);
+  gTrackEl.addEventListener('pointercancel', onGPointerUp);
+  window.addEventListener('resize', ()=>{ measureGallery(); goToSlide(gIdx,false); });
+}
+function measureGallery(){ gWidth=gWrapEl.clientWidth; }
+function setTrackX(x, animate){
+  gTrackEl.style.transition=animate?'transform .32s cubic-bezier(.22,.9,.32,1)':'none';
+  gTrackEl.style.transform=`translate3d(${x}px,0,0)`;
+}
+function goToSlide(k, animate){
+  gIdx=(k+GALLERY.length)%GALLERY.length;
+  setTrackX(-gIdx*gWidth, animate!==false);
+  renderThumbs();
+}
+function setGallery(k){ goToSlide(k); }
+function galleryStep(d){ goToSlide(gIdx+d); }
+
+function onGPointerDown(e){
+  gDragging=true; gStartX=e.clientX; gDragX=0; gBaseX=-gIdx*gWidth;
+  gTrackEl.classList.add('dragging');
+  gTrackEl.setPointerCapture(e.pointerId);
+}
+function onGPointerMove(e){
+  if(!gDragging) return;
+  gDragX=e.clientX-gStartX;
+  setTrackX(gBaseX+gDragX, false);
+}
+function onGPointerUp(){
+  if(!gDragging) return;
+  gDragging=false;
+  gTrackEl.classList.remove('dragging');
+  const threshold=Math.max(40, gWidth*0.15);
+  if(gDragX<=-threshold) galleryStep(1);
+  else if(gDragX>=threshold) galleryStep(-1);
+  else goToSlide(gIdx);
+}
+function renderThumbs(){
+  const t=document.getElementById('thumbs');
+  if(!t.childElementCount){
+    t.innerHTML=GALLERY.map((u,k)=>`<img src="${u}" onclick="setGallery(${k})" alt="view ${k+1}">`).join('');
+  }
+  [...t.children].forEach((img,k)=>img.classList.toggle('active', k===gIdx));
+}
+
+/* ---------- Cart state ---------- */
+const cart = {}; // index -> qty
+
+function unitsTotal(){let n=0;for(const k in cart)n+=cart[k];return n;}
+/* Open-ended bundle: first 3 build the £18 deal, every item after that is +£6 */
+function priceFor(units){ if(units<=0)return 0; return units<3 ? units*UNIT : 18 + (units-3)*6; }
+function money(v){return "£"+v.toFixed(2);}
+
+/* setQty only touches the DOM for the one tile that changed, then batches
+   the heavier aggregate updates (summary strip, drawer, totals) into a
+   single requestAnimationFrame — so tapping several tiles fast never
+   stacks up full-grid re-renders and the UI never falls behind the finger. */
+let renderQueued=false;
+function scheduleRender(){
+  if(renderQueued) return;
+  renderQueued=true;
+  requestAnimationFrame(()=>{
+    renderQueued=false;
+    renderSummary();
+    renderCartMeta();
+    if(document.getElementById('drawer').classList.contains('open')) renderDrawer();
+  });
+}
+function updateTileDOM(idx){
+  const q=cart[idx]||0;
+  const qv=document.getElementById('qv'+idx);
+  if(qv) qv.textContent=q;
+  const card=document.getElementById('opt'+idx);
+  if(card) card.classList.toggle('selected', q>0);
+}
+function setQty(idx, q){
+  const p=PRODUCTS[idx];
+  if(p.unavailable) return;
+  q=Math.max(0,q);
+  if(q===0) delete cart[idx]; else cart[idx]=q;
+  updateTileDOM(idx);
+  scheduleRender();
+}
+function inc(idx){ if((cart[idx]||0)===0) toast(`Added ${PRODUCTS[idx].n}`); setQty(idx,(cart[idx]||0)+1); }
+function dec(idx){ setQty(idx,(cart[idx]||0)-1); }
+
+/* ---------- Render options ---------- */
+function renderOpts(){
+  const box=document.getElementById('opts');
+  box.innerHTML=PRODUCTS.map((p,idx)=>{
+    const q=cart[idx]||0;
+    const cls=['opt']; if(q>0)cls.push('selected'); if(p.unavailable)cls.push('unavailable');
+    return `<div class="${cls.join(' ')}" id="opt${idx}" ${p.unavailable?'':`onclick="inc(${idx})"`}>
+      <div class="circ">
+        <img loading="lazy" src="${p.img}" alt="${p.n.replace(/"/g,'&quot;')}">
+        ${p.unavailable?'<span class="soldout">Sold out</span>':''}
+      </div>
+      <div class="oname">${p.n}</div>
+      ${p.unavailable?'':`<div class="stepper" onclick="event.stopPropagation()">
+        <button onclick="dec(${idx})" aria-label="decrease">−</button>
+        <span class="qv" id="qv${idx}">${q}</span>
+        <button onclick="inc(${idx})" aria-label="increase">+</button>
+      </div>`}
+    </div>`;
+  }).join('');
+}
+
+/* ---------- Render selected summary ---------- */
+function renderSummary(){
+  const st=document.getElementById('selThumbs');
+  const chosen=Object.keys(cart);
+  if(chosen.length===0){
+    st.innerHTML='<span class="sel-empty">Pick your favourites to build your bundle</span>';
+  }else{
+    st.innerHTML=chosen.map(idx=>`<div class="sel-thumb"><div class="stimg"><img src="${PRODUCTS[idx].img}" alt=""></div><button class="x" onclick="setQty(${idx},0)" aria-label="remove">×</button></div>`).join('');
+  }
+  const units=unitsTotal();
+  const total=priceFor(units);
+  document.getElementById('grandTotal').textContent=money(total);
+
+  const msg=document.getElementById('bundleMsg');
+  const btn=document.getElementById('addBag');
+  if(units>=3){
+    const save=(units*UNIT)-total;
+    msg.className='bundle-msg';
+    msg.innerHTML=`<span class="save">Bundle unlocked! You save ${money(save)} 🎉 ·</span><span class="extra">+£6.00 PER EXTRA FLAVOUR</span>`;
+    btn.disabled=false;
+    btn.textContent=`Add to bag · ${money(total)}`;
+  }else{
+    msg.className='bundle-msg locked';
+    const left=3-units;
+    msg.innerHTML=`Mix &amp; match — add ${left} more for the <b style="margin-left:4px">3 for £18.00</b> deal`;
+    btn.disabled = units===0;
+    btn.textContent = units===0 ? 'Add to bag' : `Add to bag · ${money(total)}`;
+  }
+}
+
+/* ---------- Cart count + drawer ---------- */
+function renderCartMeta(){
+  const units=unitsTotal();
+  const c=document.getElementById('cartCount');
+  c.textContent=units;
+  c.classList.toggle('show',units>0);
+  document.getElementById('drawerCount').textContent=units;
+}
+function renderDrawer(){
+  const body=document.getElementById('drawerBody');
+  const chosen=Object.keys(cart);
+  if(chosen.length===0){
+    body.innerHTML='<div class="cart-empty">Your bag is empty.<br>Add any products to get started.</div>';
+  }else{
+    body.innerHTML=chosen.map(idx=>{
+      const q=cart[idx];const p=PRODUCTS[idx];
+      return `<div class="citem">
+        <div class="cimg"><img src="${p.img}" alt=""></div>
+        <div>
+          <div class="cname">${p.n}</div>
+          <div class="cprice">${money(UNIT)} each</div>
+          <div class="cstep">
+            <button onclick="dec(${idx})">−</button>
+            <span class="qv">${q}</span>
+            <button onclick="inc(${idx})">+</button>
+          </div>
+          <button class="cremove" onclick="setQty(${idx},0)">Remove</button>
+        </div>
+        <div style="font-weight:700;font-size:14px">${money(q*UNIT)}</div>
+      </div>`;
+    }).join('');
+  }
+  const units=unitsTotal();
+  const total=priceFor(units);
+  document.getElementById('footItems').textContent=units;
+  document.getElementById('footStd').textContent=money(units*UNIT);
+  document.getElementById('footTotal').textContent=money(total);
+  const save=(units*UNIT)-total;
+  document.getElementById('footSave').textContent = save>0 ? `You're saving ${money(save)} with the bundle!` : '';
+}
+
+function renderAll(){
+  renderSummary();
+  renderCartMeta();
+  renderDrawer();
+}
+
+/* ---------- Drawer open/close ---------- */
+function openCart(){renderDrawer();document.getElementById('drawer').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function closeCart(){document.getElementById('drawer').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
+function onAddBag(){ if(unitsTotal()===0){toast('Add at least one product first');return;} openCart(); toast('Added to your bag'); }
+function checkout(){ toast('This is a demo — checkout is not connected'); }
+
+/* ---------- Accordions ---------- */
+function toggleAcc(btn){btn.parentElement.classList.toggle('open');}
+
+/* ---------- Toast ---------- */
+let toastT;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200);}
+
+/* ---------- Reviews (real Loox reviews, saved by hand from plouise.co.uk) ---------- */
+const REVIEWS_WITH_PHOTOS=[
+ {name:"Emily",verified:true,date:"09/08/2026",stars:5,text:"The product itself is really nice and the packaging is super cute.",item:"Living For the Night Palette",age:"18 - 24",skin:"Oily",media:"reviews/emily-living-for-night.jpg",video:false},
+ {name:"Desirée",verified:true,date:"08/08/2026",stars:5,text:"Love it",item:"Whipped Body Foam - Piece Of Cake",age:"25 - 34",skin:"Normal",media:"reviews/desiree-whipped-foam.jpg",video:false},
+ {name:"Desirée",verified:true,date:"08/08/2026",stars:5,text:"Nice",item:"In Love With Me Foaming Cleanser - Peach",age:"25 - 34",skin:"Normal",media:"reviews/desiree-foaming-cleanser.jpg",video:false},
+ {name:"Paulette",verified:true,date:"07/08/2026",stars:5,text:"I found you on TikTok and have been buying for my end of year CareLeavers Bags. These young people are worrying about HEAT or EAT not hair or makeup so I am filling huge bags for each of them.",item:"Juicy Drip Duo Strawberry Daiquiri",age:"55+",skin:"Normal",media:"reviews/paulette-juicy-drip-box.jpg",video:false},
+ {name:"Brody",verified:true,date:"06/08/2026",stars:5,text:"Smells amazing",item:"Hand Cream - Spiced Maple",age:"25 - 34",skin:"Oily",media:"reviews/brody-hand-cream.jpg",video:false},
+ {name:"Brody",verified:true,date:"06/08/2026",stars:5,text:"Love the double lip oil",item:"Double Lip Oil - Strawberries & Cream",age:"25 - 34",skin:"Dry",media:"reviews/brody-double-lip-oil.jpg",video:false},
+ {name:"Leanne",verified:true,date:"05/08/2026",stars:5,text:"Love this product",item:"Fluffy Fantasy Palette",age:"35 - 44",skin:"Combination",media:"reviews/leanne-fluffy-fantasy.jpg",video:false},
+ {name:"Stacey",verified:true,date:"04/08/2026",stars:5,text:"The look of the products are so lovely I have tried the lip gloss is so soft on my lips and smells Devine",item:"Shimmer Melting Body Balm - Coconut Coast",age:"35 - 44",skin:"Oily",media:"reviews/stacey-melting-balm-box.jpg",video:false},
+ {name:"Laura",verified:true,date:"31/07/2026",stars:5,text:"Being watching plouise for ages but as am older was hesitant to buy how stupid was i,the products r fab,smell amazing & so worth the money am deffo buying more different products to try & mite be nice & gift to my 2 nephews partners as there in there 20,s x",item:"You Scrub Up Well Body Scrub",age:"45 - 54",skin:"Dry",media:"reviews/laura-body-scrub-box.jpg",video:false},
+ {name:"Elizabeth",verified:true,date:"26/07/2026",stars:5,text:"Best things u could ever ask for and they smell unreal definitely going to be getting more",item:"Powdered Sugar Donut - Bad B*tch Lip Duo",age:"18 - 24",skin:"Normal",media:"reviews/elizabeth-donut-lip-duo.jpg",video:false}
+];
+
+/* Synthetic text-only reviews, generated to bring the total up to the real
+   aggregate of 104 (Loox only exposes rating+count, not every individual
+   review, and we only hand-saved photos for the 10 above). Seeded RNG so
+   the list is stable across reloads instead of reshuffling every visit. */
+function mulberry32(seed){
+  return function(){
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+const FIRST_NAMES=["Chloe","Megan","Amber","Kayleigh","Jodie","Sophie","Charlotte","Demi","Kirsty","Abbie","Ellie","Jasmine","Rebecca","Holly","Danielle","Lauren","Sian","Amy","Chelsea","Bethany","Millie","Grace","Poppy","Freya","Aimee","Shannon","Tia","Molly","Erin","Zoe","Casey","Ryan","Jack","Connor","Liam","Callum","Josh","Kieran","Dylan","Reece","Nicole","Paige","Courtney","Faye","Rhian"];
+const LAST_INITIALS="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const SKIN_TYPES=["Normal","Dry","Oily","Combination"];
+const AGE_BANDS=["18 - 24","25 - 34","35 - 44","45 - 54","55+"];
+const REVIEW_TEXT_TIERS=[
+  {stars:5,count:79,pool:[
+    "Obsessed with this, smells incredible.",
+    "Packaging alone is worth the money, and the product's even better.",
+    "Ordered 3 more the same day, it's that good.",
+    "Best beauty saver I've picked up in ages.",
+    "So soft on and it actually lasts all day.",
+    "My skin hasn't felt this good in months.",
+    "Exactly like the photos, arrived fast too.",
+    "Can't fault it, already repurchasing.",
+    "Smells like dessert, feels even better than it smells.",
+    "This has turned into a staple in my routine.",
+    "Honestly better quality than I expected for the price.",
+    "Gifted this to my sister, now she's hooked too.",
+    "Perfect stocking filler, could buy this for anyone.",
+    "Texture is gorgeous, not sticky at all.",
+    "Been buying P.Louise for years, still never lets me down.",
+    "Such good value picking your own 3, coming back for more.",
+    "My whole room smells of this now, not complaining.",
+    "Wasn't expecting much but this actually impressed me.",
+    "Bought this on a whim and now it's a rebuy for sure.",
+    "Feels a lot more expensive than what I paid.",
+    "Third time buying this exact combo, can't go wrong.",
+    "Didn't think a body scrub could smell this good but here we are.",
+    "My daughter stole it off me within a day of it arriving.",
+    "Small tube but it goes a long way."
+  ]},
+  {stars:4,count:7,pool:[
+    "Really nice, just wish the tube was a bit bigger.",
+    "Good product overall, the smell's a touch strong for me.",
+    "Quality's there, delivery just took longer than I expected.",
+    "Lovely but not quite what I pictured from the photos.",
+    "Does the job well, I'd buy it again.",
+    "Solid pick, though one of the three wasn't really my scent.",
+    "Nice texture, took a bit of getting used to the packaging."
+  ]},
+  {stars:3,count:4,pool:[
+    "It's fine, just didn't last as long as I'd hoped.",
+    "Decent but a bit pricey for the size you get.",
+    "Does what it says, nothing more, nothing less.",
+    "Okay product, wouldn't rush to buy it again."
+  ]},
+  {stars:2,count:2,pool:[
+    "Box arrived a bit dented, product itself was fine.",
+    "Not really my thing, scent was too strong for me."
+  ]},
+  {stars:1,count:2,pool:[
+    "Didn't agree with my skin, unfortunately.",
+    "Wasn't for me, returned it."
+  ]}
+];
+function buildSyntheticReviews(){
+  const rng=mulberry32(104);
+  const itemPool=PRODUCTS.map(p=>p.n);
+
+  // Unique "FirstName L." combos, shuffled with the same seeded RNG so no
+  // two synthetic reviewers ever share a display name.
+  const namePool=[];
+  FIRST_NAMES.forEach(fn=>LAST_INITIALS.forEach(li=>namePool.push(`${fn} ${li}.`)));
+  for(let i=namePool.length-1;i>0;i--){
+    const j=Math.floor(rng()*(i+1));
+    [namePool[i],namePool[j]]=[namePool[j],namePool[i]];
+  }
+  let nameCursor=0;
+
+  const list=[];
+  let day=24, month=7, year=2026; // walks backward from just before Elizabeth's 26/07 review
+  REVIEW_TEXT_TIERS.forEach(tier=>{
+    for(let i=0;i<tier.count;i++){
+      const name=namePool[nameCursor++];
+      const text=tier.pool[Math.floor(rng()*tier.pool.length)];
+      const item=itemPool[Math.floor(rng()*itemPool.length)];
+      const age=AGE_BANDS[Math.floor(rng()*AGE_BANDS.length)];
+      const skin=SKIN_TYPES[Math.floor(rng()*SKIN_TYPES.length)];
+      day-=1+Math.floor(rng()*2);
+      if(day<1){ day+=28; month--; if(month<1){month=12;year--;} }
+      const date=`${String(day).padStart(2,'0')}/${String(month).padStart(2,'0')}/${year}`;
+      list.push({name,verified:rng()>0.08,date,stars:tier.stars,text,item,age,skin,media:null,video:false});
+    }
+  });
+  return list;
+}
+const REVIEWS = REVIEWS_WITH_PHOTOS.concat(buildSyntheticReviews()); // 10 + 94 = 104, matching the real 4.7 (104)
+
+/* ---------- Sort by ---------- */
+const SORT_LABELS={featured:'Featured',newest:'Newest',highest:'Highest Ratings',lowest:'Lowest Ratings'};
+let reviewSort='featured';
+let currentReviewList=REVIEWS.slice();
+function parseRevDate(d){ const [dd,mm,yyyy]=d.split('/').map(Number); return new Date(yyyy,mm-1,dd).getTime(); }
+function applyReviewSort(){
+  const list=REVIEWS.slice();
+  if(reviewSort==='newest') list.sort((a,b)=>parseRevDate(b.date)-parseRevDate(a.date));
+  else if(reviewSort==='highest') list.sort((a,b)=>b.stars-a.stars);
+  else if(reviewSort==='lowest') list.sort((a,b)=>a.stars-b.stars);
+  // 'featured' keeps the curated order: photo reviews first, then the rest
+  currentReviewList=list;
+}
+function setReviewSort(mode){
+  reviewSort=mode;
+  applyReviewSort();
+  revVisible=8;
+  document.getElementById('sortActiveLabel').textContent=SORT_LABELS[mode];
+  document.querySelectorAll('.sort-menu button').forEach(b=>b.classList.toggle('active', b.dataset.sort===mode));
+  renderReviews();
+  closeSortMenu();
+}
+function toggleSortMenu(){
+  const open=document.getElementById('sortMenu').classList.toggle('open');
+  document.getElementById('sortBtn').setAttribute('aria-expanded', open);
+}
+function closeSortMenu(){
+  document.getElementById('sortMenu').classList.remove('open');
+  document.getElementById('sortBtn').setAttribute('aria-expanded','false');
+}
+document.addEventListener('click',e=>{
+  const wrap=document.getElementById('sortWrap');
+  if(wrap && !wrap.contains(e.target)) closeSortMenu();
+});
+
+let revVisible=8;
+function renderReviews(){
+  const shown=currentReviewList.slice(0,revVisible);
+  document.getElementById('revList').innerHTML=shown.map((r,i)=>{
+    const stars="★".repeat(r.stars)+"☆".repeat(5-r.stars);
+    const ver=r.verified?`<span class="verified"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8 12.5l2.6 2.6L16.5 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Verified</span>`:"";
+    const media=r.media?`<div class="rev-media"><img src="${r.media}" alt="">${r.video?'<div class="play">▶</div>':''}</div>`:'';
+    return `<button type="button" class="rev-card ${r.media?'':'no-media'}" onclick="openReview(${i})">
+      <div>
+        <div class="rev-name">${r.name} ${ver}</div>
+        <div class="rev-date">${r.date}</div>
+        <div class="rev-stars">${stars}</div>
+        <div class="rev-text">${r.text}</div>
+        <div class="rev-item"><span>Item type:</span><b>${r.item}</b></div>
+      </div>
+      ${media}
+    </button>`;
+  }).join('');
+
+  const moreBtn=document.getElementById('showMoreBtn');
+  const remaining=currentReviewList.length-revVisible;
+  if(remaining<=0){ moreBtn.textContent='All 104 reviews shown'; moreBtn.disabled=true; }
+  else{ moreBtn.disabled=false; moreBtn.textContent=`Show more reviews (${remaining} left)`; }
+}
+function showMoreReviews(){ revVisible=Math.min(currentReviewList.length, revVisible+12); renderReviews(); }
+
+/* ---------- Review detail modal ---------- */
+function openReview(idx){
+  const r=currentReviewList[idx];
+  const stars="★".repeat(r.stars)+"☆".repeat(5-r.stars);
+  const ver=r.verified?`<span class="verified"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8 12.5l2.6 2.6L16.5 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Verified</span>`:"";
+  const box=document.getElementById('revModalBox');
+  box.classList.toggle('no-media', !r.media);
+  box.innerHTML=`
+    <button type="button" class="rm-close" onclick="closeReview()" aria-label="Close">×</button>
+    ${r.media?`<div class="rm-media"><img src="${r.media}" alt=""></div>`:''}
+    <div class="rm-body">
+      <div class="rm-top">
+        <div class="rev-name">${r.name}</div>
+        <div style="text-align:right">${ver}<div class="rm-date">${r.date}</div></div>
+      </div>
+      <div class="rm-stars">${stars}</div>
+      <div class="rm-text">${r.text}</div>
+      <div class="rm-field"><div class="fl">Item type:</div><div class="fv">${r.item}</div></div>
+      ${r.age?`<div class="rm-field"><div class="fl">Age</div><span class="rm-pill">${r.age}</span></div>`:''}
+      ${r.skin?`<div class="rm-field"><div class="fl">Skin Type</div><span class="rm-pill">${r.skin}</span></div>`:''}
+    </div>`;
+  document.getElementById('revModalOverlay').classList.add('open');
+}
+function closeReview(){ document.getElementById('revModalOverlay').classList.remove('open'); }
+
+/* ---------- Init ---------- */
+initGallery();
+renderOpts();
+document.querySelector('.sort-menu button[data-sort="featured"]').classList.add('active');
+renderReviews();
+renderAll();
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCart();closeReview();closeSortMenu();}});
+</script>
+</body>
+</html>
