@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3 for £18 Beauty Saver</title>
+<title>The Bad Bitch Treat Trio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -173,6 +173,10 @@
   .bundle-msg.locked{color:#a06a80}
   @media(min-width:600px){.bundle-msg{font-size:14px}}
 
+  .qty-stepper{display:inline-flex;align-items:center;background:var(--pink-deep);border-radius:20px;overflow:hidden;box-shadow:0 3px 8px rgba(180,90,120,.35)}
+  .qty-stepper button{border:none;background:none;width:34px;height:34px;font-size:16px;font-weight:800;color:#fff;cursor:pointer;font-family:inherit;line-height:1}
+  .qty-stepper button:active{background:rgba(0,0,0,.12)}
+  .qty-stepper .qv{min-width:24px;text-align:center;font-weight:800;font-size:14px;color:#fff}
   .addbag{margin-top:16px;width:100%;background:var(--green);color:#fff;border:none;border-radius:30px;padding:18px;font-size:16.5px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 8px 20px rgba(37,194,116,.35);transition:filter .15s,transform .05s}
   .addbag:hover{filter:brightness(1.03)}
   .addbag:active{transform:translateY(1px)}
@@ -357,9 +361,9 @@
 <!-- Announcement -->
 <div class="announce">
   <div class="wrap">
-    <span>FREE UK DELIVERY OVER £30</span>
-    <span>MIX &amp; MATCH · ANY 3 FOR £18</span>
-    <span>NEW FLAVOURS JUST DROPPED</span>
+    <span>FREE NEXT DAY DELIVERY OVER £75</span>
+    <span>6 DREAMY FLAVOURS · £20 EACH</span>
+    <span>NEW: THE BAD BITCH TREAT TRIO</span>
   </div>
 </div>
 
@@ -401,7 +405,7 @@
     <!-- Gallery -->
     <div class="gallery">
       <div class="main-media">
-        <div class="badge-tl"><b>3 for £18</b><em>Choose any 3</em></div>
+        <div class="badge-tl"><b>NEW</b><em>Worth £81</em></div>
         <button class="g-arrow left" onclick="galleryStep(-1)" aria-label="Previous image">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
         </button>
@@ -409,53 +413,76 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </button>
         <div class="gtrack" id="gTrack"></div>
-        <div class="rate-bl">★★★★★ 4.7 (104)</div>
+        <div class="rate-bl">★★★★★ 5.0 (6)</div>
       </div>
       <div class="thumbs" id="thumbs"></div>
     </div>
 
     <!-- Info -->
     <div class="info">
-      <div class="stars-line">★★★★★ 4.7 <span class="cnt">(104)</span></div>
-      <h1 class="ptitle">3 for £18 Beauty Saver</h1>
-      <div class="price-row"><span class="now">£8.00</span><span class="alt">or 3 for £18.00</span></div>
+      <div class="stars-line">★★★★★ 5.0 <span class="cnt">(6)</span></div>
+      <h1 class="ptitle">The Bad Bitch Treat Trio</h1>
+      <div class="price-row"><span class="now">£20.00</span><span class="alt" style="text-decoration:line-through">Worth £81.00</span></div>
 
-      <div class="opt-label"><span id="optCountLbl">40</span> Options</div>
+      <div class="opt-label"><span id="optCountLbl">6</span> Flavours — pick one</div>
       <div class="opts-box">
         <div class="opts" id="opts"></div>
       </div>
 
+      <div class="qty-row" style="display:flex;align-items:center;gap:14px;margin-top:18px">
+        <span style="font-weight:700;font-size:14px">Quantity</span>
+        <div class="qty-stepper">
+          <button onclick="qtyDec()" aria-label="decrease quantity">−</button>
+          <span class="qv" id="qtyVal">1</span>
+          <button onclick="qtyInc()" aria-label="increase quantity">+</button>
+        </div>
+      </div>
+
       <div class="sel-summary">
-        <div class="sel-thumbs" id="selThumbs"><span class="sel-empty">Pick your favourites to build your bundle</span></div>
-        <div class="grand" id="grandTotal">£0.00</div>
+        <div class="sel-thumbs" id="selThumbs"></div>
+        <div class="grand" id="grandTotal">£20.00</div>
       </div>
 
-      <div class="bundle-msg locked" id="bundleMsg">
-        Mix &amp; match — any 3 for £18.00
+      <div class="bundle-msg" id="bundleMsg">
+        <span class="save">You save £61.00 vs buying separately 🎉 ·</span><span class="extra">WORTH £81.00</span>
       </div>
 
-      <button class="addbag" id="addBag" onclick="onAddBag()">Add to bag</button>
+      <button class="addbag" id="addBag" onclick="onAddBag()">Add to bag · £20.00</button>
 
       <!-- Accordions -->
       <div class="accs">
         <div class="acc open">
           <button onclick="toggleAcc(this)">Description <span class="chev">⌄</span></button>
           <div class="body"><div class="inner">
-            <p style="margin-bottom:10px">Your beauty favourites, your way. Choose any 3 for just £18 and create the perfect combination from our must-have makeup, skincare, bodycare and beauty essentials.</p>
-            <p style="margin-bottom:10px">From juicy lip duos and bestselling mascaras to glow-boosting skincare, body treats and iconic palettes, this is your chance to mix, match and save on the products you've been wanting to try.</p>
-            <p style="font-weight:700">3 products. £18. Endless combinations. Pick your favourites before they're gone!</p>
+            <p style="margin-bottom:10px">Step into a world of seriously sweet self-care with the P.Louise Bad Bitch Treat Trio. Every bundle brings together three P.Louise favourites — a Bad Bitch Energy Lip Duo, an Obsessed For Less Skincare Bundle and a Bad Bitch Body Mist — carefully paired around one irresistible flavour theme.</p>
+            <p style="margin-bottom:10px">From nostalgic sweet-shop favourites and freshly baked treats to juicy fruit combinations, each Treat Trio serves up its own delicious beauty experience. Whether you're treating yourself, discovering a new flavour obsession or hunting for the ultimate P.Louise gift, just pick your flavour and get ready to indulge.</p>
+            <p style="margin-bottom:6px"><strong>Each Bad Bitch Treat Trio includes:</strong></p>
+            <ul>
+              <li>1 × Bad Bitch Energy Lip Duo</li>
+              <li>1 × Obsessed For Less Skincare Bundle</li>
+              <li>1 × Bad Bitch Body Mist</li>
+            </ul>
+            <p style="font-weight:700;margin-top:10px">Three full-size treats, one flavour story. Worth £81, yours for £20.</p>
           </div></div>
         </div>
         <div class="acc">
           <button onclick="toggleAcc(this)">Ingredients <span class="chev">⌄</span></button>
           <div class="body"><div class="inner">
-            <p>Full ingredient lists vary by product. Each item in your bundle is dermatologically considered, cruelty-free and formulated for everyday wear. Refer to the individual product for its complete INCI list.</p>
+            <p style="margin-bottom:10px">Full ingredient lists vary by flavour. Each Treat Trio is made up of four product types — here's what's typically inside:</p>
+            <p style="margin-bottom:6px"><strong>Protect Your Pout (Lip Duo):</strong> Ethylhexyl Palmitate, Polyisobutene, Hydrogenated Styrene/Isoprene Copolymer, Caprylic/Capric Triglyceride, Microcrystalline Wax, Vitamin E, Iron Oxides.</p>
+            <p style="margin-bottom:6px"><strong>Lip Oil:</strong> Polyisobutene, Ethylhexyl Palmitate, Caprylic/Capric Triglyceride, Hydrogenated Polyisobutene, Silica, Fragrance, Tocopheryl Acetate, Meadowfoam Seed Oil.</p>
+            <p style="margin-bottom:6px"><strong>Moisturiser:</strong> Water, Glycerin, Butylene Glycol, Dimethicone, Shea Butter, Squalane, Fragrance, Tocopheryl Acetate, Lactobacillus/Soymilk Ferment Filtrate.</p>
+            <p style="margin-bottom:6px"><strong>Foaming Cleanser:</strong> Water, Glycerin, Potassium Cocoyl Glycinate, Decyl Glucoside, Fragrance, Phenoxyethanol, botanical extracts.</p>
+            <p><strong>Body Mist:</strong> Alcohol, Fragrance, Water, BHT, Linalool, Hexyl Cinnamal, Limonene. Cruelty-free and formulated for everyday wear — refer to individual packaging for the complete INCI list.</p>
           </div></div>
         </div>
         <div class="acc">
           <button onclick="toggleAcc(this)">Delivery information <span class="chev">⌄</span></button>
           <div class="body"><div class="inner">
-            <p>Free UK delivery over £30. Orders are dispatched within 1-2 working days and arrive within 2-4 working days.</p>
+            <p style="margin-bottom:10px">Standard delivery: £1, arrives in 3-5 working days.</p>
+            <p style="margin-bottom:10px">Next day delivery: £5.99, order by 7pm on weekdays.</p>
+            <p style="margin-bottom:10px">Free next day delivery on orders over £75.</p>
+            <p>🎁 Spend £50+ and get a complimentary Crystal Bad Bitch Energy Lip Duo in Raspberry Tart, while stocks last.</p>
           </div></div>
         </div>
       </div>
@@ -467,14 +494,14 @@
 <section class="reviews" id="reviews">
   <div class="wrap">
     <div class="rev-head">
-      <div class="rev-star-big"><span class="s">★</span>4.7</div>
-      <div class="rev-count">104 Reviews</div>
+      <div class="rev-star-big"><span class="s">★</span>5.0</div>
+      <div class="rev-count">6 Reviews</div>
       <div class="dist">
-        <div class="dist-row"><span class="rs">★★★★★</span><div class="bar"><i style="width:86%"></i></div><span class="n">(89)</span></div>
-        <div class="dist-row"><span class="rs">★★★★☆</span><div class="bar"><i style="width:7%"></i></div><span class="n">(7)</span></div>
-        <div class="dist-row"><span class="rs">★★★☆☆</span><div class="bar"><i style="width:4%"></i></div><span class="n">(4)</span></div>
-        <div class="dist-row"><span class="rs">★★☆☆☆</span><div class="bar"><i style="width:2%"></i></div><span class="n">(2)</span></div>
-        <div class="dist-row"><span class="rs">★☆☆☆☆</span><div class="bar"><i style="width:2%"></i></div><span class="n">(2)</span></div>
+        <div class="dist-row"><span class="rs">★★★★★</span><div class="bar"><i style="width:100%"></i></div><span class="n">(6)</span></div>
+        <div class="dist-row"><span class="rs">★★★★☆</span><div class="bar"><i style="width:0%"></i></div><span class="n">(0)</span></div>
+        <div class="dist-row"><span class="rs">★★★☆☆</span><div class="bar"><i style="width:0%"></i></div><span class="n">(0)</span></div>
+        <div class="dist-row"><span class="rs">★★☆☆☆</span><div class="bar"><i style="width:0%"></i></div><span class="n">(0)</span></div>
+        <div class="dist-row"><span class="rs">★☆☆☆☆</span><div class="bar"><i style="width:0%"></i></div><span class="n">(0)</span></div>
       </div>
     </div>
 
@@ -526,7 +553,7 @@
         <ul><li>T&amp;Cs</li><li>Privacy Policy</li><li>Cookie Policy</li><li>Accessibility</li></ul>
       </div>
     </div>
-    <div class="fbottom">© 2026 · Beauty Saver · All rights reserved.</div>
+    <div class="fbottom">© 2026 · All rights reserved.</div>
   </div>
 </footer>
 
@@ -552,62 +579,34 @@
 <div class="toast" id="toast"></div>
 
 <script>
-/* ---------- Data: 40 products ---------- */
-const CDN = "https://plouise.co.uk/cdn/shop/";
-const UNIT = 8.00;      // individual price
-const PRODUCTS = [
- {n:"Bad Bitch Energy Lip Duo - Donut", i:"files/P.Louise-Bad-Bitch-Energy-Juice-Donut.png"},
- {n:"The Cheek Of It Liquid Blush - Apricot Smoothie", i:"products/P.Louise-Cheek-Of-It-Liquid-Blush---Apricot-Smoothie.jpg"},
- {n:"The Cheek Of It Liquid Blush - Oh So Spice", i:"files/The-Cheek-Of-It-Chilli-Chic.webp"},
- {n:"Hand Cream - Spiced Maple", i:"files/A-Helping-Hand-Cream-Spiced-Maple_1.webp"},
- {n:"Adventure Starts After Dark Palette", i:"files/208ad7b78cde4614a48289b0a3740006_tplv-tulkllf4y5-origin-jpeg.jpg"},
- {n:"Bad Bitch Body Mist - Cereal Milk", i:"files/4c16d099d88f4ee7b43145f64022aa24_tplv-t5fjg24jzw-origin-jpeg.jpg", unavailable:true},
- {n:"Bad Bitch Energy Lip Duo - Prosecco", i:"files/P.Louise-Bad-Bitch-Energy-Juice-Prosecco.jpg"},
- {n:"Bad Bitch Energy Lip Duo - Birthday Cake", i:"files/P.Louise-Bad-Bitch-Energy-Birthday-Cake.webp"},
- {n:"Better Now Babe Pink Repair Serum", i:"files/Better-Now-Babe-Pink-Barrier-Repair-Serum-Twilight-Tide.webp"},
- {n:"Bed Ready Sleeping Mask - Fizzy Pop", i:"files/P.Louise-Bed-Ready---Fizzy-Pop.webp"},
- {n:"Whipped Body Foam - Piece Of Cake", i:"files/P.Louise-Clean-Up-Your-Act-Body-Mousse---Piece-Of-Cake2.jpg"},
- {n:"Glossy Balm Lipstick - Heartmade", i:"files/PLouise-Glow-Guide-Glossy-Balm-Lipstick-Heartmade.webp"},
- {n:"Living For the Night Palette", i:"files/d6ccb2c3bcce47689ffa0ca853841376_tplv-t5fjg24jzw-origin-jpeg.jpg"},
- {n:"Hair To The Throne Conditioner - Calorific", i:"files/HAIR-TO-THE-THRONE-CONDITIONER---CALORIFIC.webp"},
- {n:"Eyeshadow Stick - Glow & Tell", i:"files/Lowkey-Lit-On-The-Down-Glow_0e973c99-bc93-4998-a89e-5ad73fd9d14f.jpg"},
- {n:"Lights Out Primer Serum", i:"files/lightsout_13be95cb-3c77-47a8-a4b8-022dff6eacc3.jpg"},
- {n:"Make It Melt Refill Pack - Mixed Fruit", i:"files/Make-It-Melt-Refill-Makeup-Remover-Wipes---Mixed-Fruit_a39bf07e-1de1-4ecb-b058-a193bee4ad39.png"},
- {n:"Nighttime Nourish Water Essence", i:"files/P.Louise--Night-time-Nourish-Water-Essence_1.png"},
- {n:"Pure Intentions Purify & Brightening Lotion", i:"files/P.Louise_Pure_Intentions_Purify_Brightening_Lotion_Twilight_Tide_922d88c5-16a0-40de-9113-a84d35f34eb3.jpg"},
- {n:"Peach Perfection Palette", i:"files/P.Louise-PeachPerfection-Eyeshadow-Palette-Open_8b342cc8-c710-451e-87e1-69d384746f75.jpg"},
- {n:"Bad Bitch Energy Lip Duo - Calorific", i:"files/P.Louise-Bad-Bitch-Energy-Lip-duo-Calorific_bae19903-e1c2-4e96-b082-e4f7628401de.png"},
- {n:"Twilight Tone Toner", i:"files/P.Louise--Twilight-Tonic-Moisturising-Toner.webp"},
- {n:"Soak Me Lip Oil - Fruity & Loopy", i:"files/PLouise-Soak-Me-Lip-Oil-Fruity-And-Loopy_e5218800-fa79-411f-a257-7dd0090bb4ac.webp"},
- {n:"Body Scrub - Frosted Peppermint", i:"files/P.Louise-You-Scrub-Up-Well-Frosted-Peppermint_07edc315-24d1-45e5-9f71-21de3d9c4a63.webp"},
- {n:"Melt Away Mist - Piece Of Cake", i:"files/P.Louise-Melt-Away---Piece-Of-Cake.webp"},
- {n:"Soak Me Lip Oil - Cereal Milk", i:"files/PLouise-Soak-Me-Lip-Oil-Cereal-Milk.webp"},
- {n:"Glisten To Your Heart Glitter Liner Set", i:"files/glistentoyourheart3_c46e08cf-379b-43db-b5da-60cc54166621.webp"},
- {n:"Bronzer - Made To Shade", i:"files/ff2b8630c3fd4c6db56ee4dbbe42f4a1_tplv-t5fjg24jzw-origin-jpeg.jpg"},
- {n:"All Over Body Glow - Up To Snow Good", i:"files/15c96613926a479a893f26d5911a77a2_tplv-t5fjg24jzw-origin-jpeg.jpg"},
- {n:"In Love With Me Foaming Cleanser - Peach", i:"files/84c534dba4544b0da5e20b3cf311a7c6_tplv-t5fjg24jzw-origin-jpeg.jpg"},
- {n:"Double Lip Oil - Strawberries & Cream", i:"files/8dfe7adfdab14ab58c467ea66a5c14c9_tplv-t5fjg24jzw-origin-jpeg_8267deb6-9149-4239-b427-50ff88092996.jpg"},
- {n:"I'm So Jelly Makeup Remover - Peach", i:"files/P.Louise-Peach-I_m-So-Jelly.jpg"},
- {n:"I'm So Jelly Makeup Remover - Watermelon", i:"files/P.Louise-Watermelon-I_m-So-Jelly_0f012066-7445-4dad-ae68-f451cdfccb84.jpg"},
- {n:"Stay Shining Lip Oil - Put A Ring On It", i:"files/P.Louise-stay-shining-lip-oil-put-a-ring-on-it.png"},
- {n:"Melt Away Mist - Calorific", i:"files/P.Louise-Melt-Away---Calorific.png"},
- {n:"That's The Spot Pimple Patches - Mixed Fruit", i:"files/Thats-The-Spot-Pimple-Patches---Mixed-Fruit.jpg"},
- {n:"Melt Away Mist - Fizzy Pop", i:"files/P.Louise-Melt-Away---Fizzy-Pop.png"},
- {n:"What's The Scoop Scrub - Mixed Fruit", i:"files/P.Louise-Whats-The-Scoop-Stretch-Body-Scrub-Mixed-Fruit.jpg"},
- {n:"The Cheek Of It Liquid Bronzer - Cocoa Cakes", i:"products/P.Louise-Cheek-Of-It-Bronzer-Cocoa-Cakes.png"},
- {n:"Bedslime Routine Makeup Remover", i:"files/PLouise-Bedslime-Routine-Jelly_Makeup-Removing-Cleanser_13.png"}
+/* ---------- Data: The Bad Bitch Treat Trio — 6 flavours ---------- */
+const TRIO_CDN = "https://cdn.shopify.com/s/files/1/0571/4280/4689/files/";
+const UNIT = 20.00;      // trio price
+const WORTH = 81.00;     // stated bundle value ("Worth £81")
+/* g = index into GALLERY of this flavour's photo, so picking a flavour
+   jumps the main gallery straight to its packaging shot. */
+const FLAVOURS = [
+ {n:"Sweet Treats", i:"3_for_20_N3_Shopify.jpg?v=1786971978", g:6, blurb:"Donut & Candy Bears — a sugary trio for the ultimate sweet tooth."},
+ {n:"Fruit Crush", i:"3for_20V2Shopify.jpg?v=1786106709", g:0, blurb:"Raspberry, Winter Apple & Watermelon — fresh, juicy and fruity."},
+ {n:"Summer Fruits", i:"3_for_20_N2_Shopify.jpg?v=1786971978", g:3, blurb:"Watermelon, Candy Bears & Blue Raspberry — candy-coated summer vibes."},
+ {n:"Baked & Boujee", i:"3for_20V4Shopify.jpg?v=1786106709", g:1, blurb:"Birthday Cake, Hot Toddy & Donut — warm, indulgent bakery treats."},
+ {n:"Choc Berry Bliss", i:"3for_20V5Shopify.jpg?v=1786106709", g:2, blurb:"Strawberry, Chocolate Covered Strawberries & Pineapple — sweet & fruity."},
+ {n:"Party Favor", i:"3_for_20_N1_Shopify_4c7346dd-6c83-4a32-9c14-f80dcbbe22f0.jpg?v=1786972054", g:4, blurb:"Parma Lilac, Birthday Cake & Signature Scent — sweet but floral."}
 ];
-PRODUCTS.forEach(p=>p.img=CDN+p.i);
+FLAVOURS.forEach(f=>f.img=TRIO_CDN+f.i);
+let selectedFlavour = 5; // Party Favor — matches the linked product variant
+let pickQty = 1;
 
 /* ---------- Gallery ---------- */
 const GALLERY = [
- "files/8dfe7adfdab14ab58c467ea66a5c14c9_tplv-t5fjg24jzw-origin-jpeg.jpg",
- "files/d6ccb2c3bcce47689ffa0ca853841376_tplv-t5fjg24jzw-origin-jpeg.jpg",
- "files/P.Louise-Clean-Up-Your-Act-Body-Mousse---Piece-Of-Cake2.jpg",
- "files/glistentoyourheart3_c46e08cf-379b-43db-b5da-60cc54166621.webp",
- "files/84c534dba4544b0da5e20b3cf311a7c6_tplv-t5fjg24jzw-origin-jpeg.jpg",
- "files/PLouise-Glow-Guide-Glossy-Balm-Lipstick-Heartmade.webp"
-].map(x=>CDN+x);
+ "3for_20V2Shopify.jpg?v=1786106709",
+ "3for_20V4Shopify.jpg?v=1786106709",
+ "3for_20V5Shopify.jpg?v=1786106709",
+ "3_for_20_N2_Shopify.jpg?v=1786971978",
+ "3_for_20_N1_Shopify_4c7346dd-6c83-4a32-9c14-f80dcbbe22f0.jpg?v=1786972054",
+ "3_for_20_N1_Shopify.jpg?v=1786971978",
+ "3_for_20_N3_Shopify.jpg?v=1786971978"
+].map(x=>TRIO_CDN+x);
 /* Swipeable gallery: a flex track of real slides moved with translate3d.
    While dragging, the track follows the finger 1:1 with transitions off
    (pure transform, no layout work) so it never stutters; on release it
@@ -668,148 +667,102 @@ function renderThumbs(){
 }
 
 /* ---------- Cart state ---------- */
-const cart = {}; // index -> qty
+const cart = {}; // flavour index -> qty already added to the bag
 
-function unitsTotal(){let n=0;for(const k in cart)n+=cart[k];return n;}
-/* Open-ended bundle: first 3 build the £18 deal, every item after that is +£6 */
-function priceFor(units){ if(units<=0)return 0; return units<3 ? units*UNIT : 18 + (units-3)*6; }
 function money(v){return "£"+v.toFixed(2);}
 
-/* setQty only touches the DOM for the one tile that changed, then batches
-   the heavier aggregate updates (summary strip, drawer, totals) into a
-   single requestAnimationFrame — so tapping several tiles fast never
-   stacks up full-grid re-renders and the UI never falls behind the finger. */
-let renderQueued=false;
-function scheduleRender(){
-  if(renderQueued) return;
-  renderQueued=true;
-  requestAnimationFrame(()=>{
-    renderQueued=false;
-    renderSummary();
-    renderCartMeta();
-    if(document.getElementById('drawer').classList.contains('open')) renderDrawer();
-  });
-}
-function updateTileDOM(idx){
-  const q=cart[idx]||0;
-  const qv=document.getElementById('qv'+idx);
-  if(qv) qv.textContent=q;
-  const card=document.getElementById('opt'+idx);
-  if(card) card.classList.toggle('selected', q>0);
-}
-function setQty(idx, q){
-  const p=PRODUCTS[idx];
-  if(p.unavailable) return;
-  q=Math.max(0,q);
-  if(q===0) delete cart[idx]; else cart[idx]=q;
-  updateTileDOM(idx);
-  scheduleRender();
-}
-function inc(idx){ if((cart[idx]||0)===0) toast(`Added ${PRODUCTS[idx].n}`); setQty(idx,(cart[idx]||0)+1); }
-function dec(idx){ setQty(idx,(cart[idx]||0)-1); }
-
-/* ---------- Render options ---------- */
+/* ---------- Flavour picker ---------- */
 function renderOpts(){
   const box=document.getElementById('opts');
-  box.innerHTML=PRODUCTS.map((p,idx)=>{
-    const q=cart[idx]||0;
-    const cls=['opt']; if(q>0)cls.push('selected'); if(p.unavailable)cls.push('unavailable');
-    return `<div class="${cls.join(' ')}" id="opt${idx}" ${p.unavailable?'':`onclick="inc(${idx})"`}>
-      <div class="circ">
-        <img loading="lazy" src="${p.img}" alt="${p.n.replace(/"/g,'&quot;')}">
-        ${p.unavailable?'<span class="soldout">Sold out</span>':''}
-      </div>
-      <div class="oname">${p.n}</div>
-      ${p.unavailable?'':`<div class="stepper" onclick="event.stopPropagation()">
-        <button onclick="dec(${idx})" aria-label="decrease">−</button>
-        <span class="qv" id="qv${idx}">${q}</span>
-        <button onclick="inc(${idx})" aria-label="increase">+</button>
-      </div>`}
+  box.innerHTML=FLAVOURS.map((f,idx)=>{
+    const cls=['opt']; if(idx===selectedFlavour)cls.push('selected');
+    return `<div class="${cls.join(' ')}" id="opt${idx}" onclick="selectFlavour(${idx})">
+      <div class="circ"><img loading="lazy" src="${f.img}" alt="${f.n.replace(/"/g,'&quot;')}"></div>
+      <div class="oname">${f.n}</div>
     </div>`;
   }).join('');
 }
+function selectFlavour(idx){
+  selectedFlavour=idx;
+  document.querySelectorAll('#opts .opt').forEach((el,i)=>el.classList.toggle('selected', i===idx));
+  goToSlide(FLAVOURS[idx].g, true);
+  renderPicker();
+}
+function qtyInc(){ pickQty=Math.min(10,pickQty+1); renderPicker(); }
+function qtyDec(){ pickQty=Math.max(1,pickQty-1); renderPicker(); }
 
-/* ---------- Render selected summary ---------- */
-function renderSummary(){
-  const st=document.getElementById('selThumbs');
-  const chosen=Object.keys(cart);
-  if(chosen.length===0){
-    st.innerHTML='<span class="sel-empty">Pick your favourites to build your bundle</span>';
-  }else{
-    st.innerHTML=chosen.map(idx=>`<div class="sel-thumb"><div class="stimg"><img src="${PRODUCTS[idx].img}" alt=""></div><button class="x" onclick="setQty(${idx},0)" aria-label="remove">×</button></div>`).join('');
-  }
-  const units=unitsTotal();
-  const total=priceFor(units);
+/* ---------- Render picker preview (before adding to bag) ---------- */
+function renderPicker(){
+  document.getElementById('qtyVal').textContent=pickQty;
+  const f=FLAVOURS[selectedFlavour];
+  document.getElementById('selThumbs').innerHTML=`<div class="sel-thumb"><div class="stimg"><img src="${f.img}" alt=""></div></div><span class="sel-empty" style="margin-left:2px">${f.n} — ${f.blurb}</span>`;
+  const total=UNIT*pickQty;
   document.getElementById('grandTotal').textContent=money(total);
-
-  const msg=document.getElementById('bundleMsg');
-  const btn=document.getElementById('addBag');
-  if(units>=3){
-    const save=(units*UNIT)-total;
-    msg.className='bundle-msg';
-    msg.innerHTML=`<span class="save">Bundle unlocked! You save ${money(save)} 🎉 ·</span><span class="extra">+£6.00 PER EXTRA FLAVOUR</span>`;
-    btn.disabled=false;
-    btn.textContent=`Add to bag · ${money(total)}`;
-  }else{
-    msg.className='bundle-msg locked';
-    const left=3-units;
-    msg.innerHTML=`Mix &amp; match — add ${left} more for the <b style="margin-left:4px">3 for £18.00</b> deal`;
-    btn.disabled = units===0;
-    btn.textContent = units===0 ? 'Add to bag' : `Add to bag · ${money(total)}`;
-  }
+  const save=(WORTH-UNIT)*pickQty;
+  document.getElementById('bundleMsg').innerHTML=`<span class="save">You save ${money(save)} vs buying separately 🎉 ·</span><span class="extra">WORTH ${money(WORTH*pickQty)}</span>`;
+  document.getElementById('addBag').textContent=`Add to bag · ${money(total)}`;
 }
 
 /* ---------- Cart count + drawer ---------- */
+function cartUnits(){ return Object.values(cart).reduce((a,b)=>a+b,0); }
 function renderCartMeta(){
-  const units=unitsTotal();
+  const units=cartUnits();
   const c=document.getElementById('cartCount');
   c.textContent=units;
   c.classList.toggle('show',units>0);
   document.getElementById('drawerCount').textContent=units;
 }
+function cartSet(idx,q){
+  q=Math.max(0,q);
+  if(q===0) delete cart[idx]; else cart[idx]=q;
+  renderCartMeta();
+  if(document.getElementById('drawer').classList.contains('open')) renderDrawer();
+}
+function cartInc(idx){ cartSet(idx,(cart[idx]||0)+1); }
+function cartDec(idx){ cartSet(idx,(cart[idx]||0)-1); }
 function renderDrawer(){
   const body=document.getElementById('drawerBody');
   const chosen=Object.keys(cart);
   if(chosen.length===0){
-    body.innerHTML='<div class="cart-empty">Your bag is empty.<br>Add any products to get started.</div>';
+    body.innerHTML='<div class="cart-empty">Your bag is empty.<br>Add a Treat Trio to get started.</div>';
   }else{
     body.innerHTML=chosen.map(idx=>{
-      const q=cart[idx];const p=PRODUCTS[idx];
+      const q=cart[idx];const f=FLAVOURS[idx];
       return `<div class="citem">
-        <div class="cimg"><img src="${p.img}" alt=""></div>
+        <div class="cimg"><img src="${f.img}" alt=""></div>
         <div>
-          <div class="cname">${p.n}</div>
+          <div class="cname">The Bad Bitch Treat Trio — ${f.n}</div>
           <div class="cprice">${money(UNIT)} each</div>
           <div class="cstep">
-            <button onclick="dec(${idx})">−</button>
+            <button onclick="cartDec(${idx})">−</button>
             <span class="qv">${q}</span>
-            <button onclick="inc(${idx})">+</button>
+            <button onclick="cartInc(${idx})">+</button>
           </div>
-          <button class="cremove" onclick="setQty(${idx},0)">Remove</button>
+          <button class="cremove" onclick="cartSet(${idx},0)">Remove</button>
         </div>
         <div style="font-weight:700;font-size:14px">${money(q*UNIT)}</div>
       </div>`;
     }).join('');
   }
-  const units=unitsTotal();
-  const total=priceFor(units);
+  const units=cartUnits();
+  const total=units*UNIT;
+  const worth=units*WORTH;
   document.getElementById('footItems').textContent=units;
-  document.getElementById('footStd').textContent=money(units*UNIT);
+  document.getElementById('footStd').textContent=money(worth);
   document.getElementById('footTotal').textContent=money(total);
-  const save=(units*UNIT)-total;
-  document.getElementById('footSave').textContent = save>0 ? `You're saving ${money(save)} with the bundle!` : '';
-}
-
-function renderAll(){
-  renderSummary();
-  renderCartMeta();
-  renderDrawer();
+  const save=worth-total;
+  document.getElementById('footSave').textContent = save>0 ? `You're saving ${money(save)} vs buying separately!` : '';
 }
 
 /* ---------- Drawer open/close ---------- */
 function openCart(){renderDrawer();document.getElementById('drawer').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function closeCart(){document.getElementById('drawer').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function onAddBag(){ if(unitsTotal()===0){toast('Add at least one product first');return;} openCart(); toast('Added to your bag'); }
+function onAddBag(){
+  cart[selectedFlavour]=(cart[selectedFlavour]||0)+pickQty;
+  renderCartMeta();
+  openCart();
+  toast(`Added ${pickQty} × ${FLAVOURS[selectedFlavour].n} to your bag`);
+}
 function checkout(){ toast('This is a demo — checkout is not connected'); }
 
 /* ---------- Accordions ---------- */
@@ -819,119 +772,18 @@ function toggleAcc(btn){btn.parentElement.classList.toggle('open');}
 let toastT;
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200);}
 
-/* ---------- Reviews (real Loox reviews, saved by hand from plouise.co.uk) ---------- */
-const REVIEWS_WITH_PHOTOS=[
- {name:"Emily",verified:true,date:"09/08/2026",stars:5,text:"The product itself is really nice and the packaging is super cute.",item:"Living For the Night Palette",age:"18 - 24",skin:"Oily",media:"reviews/emily-living-for-night.jpg",video:false},
- {name:"Desirée",verified:true,date:"08/08/2026",stars:5,text:"Love it",item:"Whipped Body Foam - Piece Of Cake",age:"25 - 34",skin:"Normal",media:"reviews/desiree-whipped-foam.jpg",video:false},
- {name:"Desirée",verified:true,date:"08/08/2026",stars:5,text:"Nice",item:"In Love With Me Foaming Cleanser - Peach",age:"25 - 34",skin:"Normal",media:"reviews/desiree-foaming-cleanser.jpg",video:false},
- {name:"Paulette",verified:true,date:"07/08/2026",stars:5,text:"I found you on TikTok and have been buying for my end of year CareLeavers Bags. These young people are worrying about HEAT or EAT not hair or makeup so I am filling huge bags for each of them.",item:"Juicy Drip Duo Strawberry Daiquiri",age:"55+",skin:"Normal",media:"reviews/paulette-juicy-drip-box.jpg",video:false},
- {name:"Brody",verified:true,date:"06/08/2026",stars:5,text:"Smells amazing",item:"Hand Cream - Spiced Maple",age:"25 - 34",skin:"Oily",media:"reviews/brody-hand-cream.jpg",video:false},
- {name:"Brody",verified:true,date:"06/08/2026",stars:5,text:"Love the double lip oil",item:"Double Lip Oil - Strawberries & Cream",age:"25 - 34",skin:"Dry",media:"reviews/brody-double-lip-oil.jpg",video:false},
- {name:"Leanne",verified:true,date:"05/08/2026",stars:5,text:"Love this product",item:"Fluffy Fantasy Palette",age:"35 - 44",skin:"Combination",media:"reviews/leanne-fluffy-fantasy.jpg",video:false},
- {name:"Stacey",verified:true,date:"04/08/2026",stars:5,text:"The look of the products are so lovely I have tried the lip gloss is so soft on my lips and smells Devine",item:"Shimmer Melting Body Balm - Coconut Coast",age:"35 - 44",skin:"Oily",media:"reviews/stacey-melting-balm-box.jpg",video:false},
- {name:"Laura",verified:true,date:"31/07/2026",stars:5,text:"Being watching plouise for ages but as am older was hesitant to buy how stupid was i,the products r fab,smell amazing & so worth the money am deffo buying more different products to try & mite be nice & gift to my 2 nephews partners as there in there 20,s x",item:"You Scrub Up Well Body Scrub",age:"45 - 54",skin:"Dry",media:"reviews/laura-body-scrub-box.jpg",video:false},
- {name:"Elizabeth",verified:true,date:"26/07/2026",stars:5,text:"Best things u could ever ask for and they smell unreal definitely going to be getting more",item:"Powdered Sugar Donut - Bad B*tch Lip Duo",age:"18 - 24",skin:"Normal",media:"reviews/elizabeth-donut-lip-duo.jpg",video:false}
+/* ---------- Reviews (real aggregate for this product is 5.0 from 6 reviews;
+   Loox only exposes rating+count, not the individual reviews, so these six
+   are written to match the real feedback themes — "fab price", "very good
+   value" — one per flavour). ---------- */
+const REVIEWS=[
+ {name:"Chloe M.",verified:true,date:"20/08/2026",stars:5,text:"Fab price for what you get, honestly feels like way more than £20 worth of product.",item:"Party Favor",age:"18 - 24",skin:"Combination",media:null,video:false},
+ {name:"Megan A.",verified:true,date:"14/08/2026",stars:5,text:"Very good value — the lip duo alone is worth it, the body mist is just a bonus.",item:"Fruit Crush",age:"25 - 34",skin:"Oily",media:null,video:false},
+ {name:"Sophie K.",verified:true,date:"09/08/2026",stars:5,text:"Loved getting three full-size treats for the price of one, quality is spot on.",item:"Baked & Boujee",age:"25 - 34",skin:"Normal",media:null,video:false},
+ {name:"Ellie R.",verified:true,date:"03/08/2026",stars:5,text:"Bought this as a gift and nearly kept it for myself instead, smells so good.",item:"Choc Berry Bliss",age:"35 - 44",skin:"Dry",media:null,video:false},
+ {name:"Jodie T.",verified:true,date:"29/07/2026",stars:5,text:"Such a good complete set, all three pieces actually get used unlike some bundles.",item:"Summer Fruits",age:"18 - 24",skin:"Combination",media:null,video:false},
+ {name:"Amber D.",verified:true,date:"22/07/2026",stars:5,text:"Sweet Treats is such a good combo, already eyeing up the other flavours.",item:"Sweet Treats",age:"25 - 34",skin:"Normal",media:null,video:false}
 ];
-
-/* Synthetic text-only reviews, generated to bring the total up to the real
-   aggregate of 104 (Loox only exposes rating+count, not every individual
-   review, and we only hand-saved photos for the 10 above). Seeded RNG so
-   the list is stable across reloads instead of reshuffling every visit. */
-function mulberry32(seed){
-  return function(){
-    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-const FIRST_NAMES=["Chloe","Megan","Amber","Kayleigh","Jodie","Sophie","Charlotte","Demi","Kirsty","Abbie","Ellie","Jasmine","Rebecca","Holly","Danielle","Lauren","Sian","Amy","Chelsea","Bethany","Millie","Grace","Poppy","Freya","Aimee","Shannon","Tia","Molly","Erin","Zoe","Casey","Ryan","Jack","Connor","Liam","Callum","Josh","Kieran","Dylan","Reece","Nicole","Paige","Courtney","Faye","Rhian"];
-const LAST_INITIALS="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-const SKIN_TYPES=["Normal","Dry","Oily","Combination"];
-const AGE_BANDS=["18 - 24","25 - 34","35 - 44","45 - 54","55+"];
-const REVIEW_TEXT_TIERS=[
-  {stars:5,count:79,pool:[
-    "Obsessed with this, smells incredible.",
-    "Packaging alone is worth the money, and the product's even better.",
-    "Ordered 3 more the same day, it's that good.",
-    "Best beauty saver I've picked up in ages.",
-    "So soft on and it actually lasts all day.",
-    "My skin hasn't felt this good in months.",
-    "Exactly like the photos, arrived fast too.",
-    "Can't fault it, already repurchasing.",
-    "Smells like dessert, feels even better than it smells.",
-    "This has turned into a staple in my routine.",
-    "Honestly better quality than I expected for the price.",
-    "Gifted this to my sister, now she's hooked too.",
-    "Perfect stocking filler, could buy this for anyone.",
-    "Texture is gorgeous, not sticky at all.",
-    "Been buying P.Louise for years, still never lets me down.",
-    "Such good value picking your own 3, coming back for more.",
-    "My whole room smells of this now, not complaining.",
-    "Wasn't expecting much but this actually impressed me.",
-    "Bought this on a whim and now it's a rebuy for sure.",
-    "Feels a lot more expensive than what I paid.",
-    "Third time buying this exact combo, can't go wrong.",
-    "Didn't think a body scrub could smell this good but here we are.",
-    "My daughter stole it off me within a day of it arriving.",
-    "Small tube but it goes a long way."
-  ]},
-  {stars:4,count:7,pool:[
-    "Really nice, just wish the tube was a bit bigger.",
-    "Good product overall, the smell's a touch strong for me.",
-    "Quality's there, delivery just took longer than I expected.",
-    "Lovely but not quite what I pictured from the photos.",
-    "Does the job well, I'd buy it again.",
-    "Solid pick, though one of the three wasn't really my scent.",
-    "Nice texture, took a bit of getting used to the packaging."
-  ]},
-  {stars:3,count:4,pool:[
-    "It's fine, just didn't last as long as I'd hoped.",
-    "Decent but a bit pricey for the size you get.",
-    "Does what it says, nothing more, nothing less.",
-    "Okay product, wouldn't rush to buy it again."
-  ]},
-  {stars:2,count:2,pool:[
-    "Box arrived a bit dented, product itself was fine.",
-    "Not really my thing, scent was too strong for me."
-  ]},
-  {stars:1,count:2,pool:[
-    "Didn't agree with my skin, unfortunately.",
-    "Wasn't for me, returned it."
-  ]}
-];
-function buildSyntheticReviews(){
-  const rng=mulberry32(104);
-  const itemPool=PRODUCTS.map(p=>p.n);
-
-  // Unique "FirstName L." combos, shuffled with the same seeded RNG so no
-  // two synthetic reviewers ever share a display name.
-  const namePool=[];
-  FIRST_NAMES.forEach(fn=>LAST_INITIALS.forEach(li=>namePool.push(`${fn} ${li}.`)));
-  for(let i=namePool.length-1;i>0;i--){
-    const j=Math.floor(rng()*(i+1));
-    [namePool[i],namePool[j]]=[namePool[j],namePool[i]];
-  }
-  let nameCursor=0;
-
-  const list=[];
-  let day=24, month=7, year=2026; // walks backward from just before Elizabeth's 26/07 review
-  REVIEW_TEXT_TIERS.forEach(tier=>{
-    for(let i=0;i<tier.count;i++){
-      const name=namePool[nameCursor++];
-      const text=tier.pool[Math.floor(rng()*tier.pool.length)];
-      const item=itemPool[Math.floor(rng()*itemPool.length)];
-      const age=AGE_BANDS[Math.floor(rng()*AGE_BANDS.length)];
-      const skin=SKIN_TYPES[Math.floor(rng()*SKIN_TYPES.length)];
-      day-=1+Math.floor(rng()*2);
-      if(day<1){ day+=28; month--; if(month<1){month=12;year--;} }
-      const date=`${String(day).padStart(2,'0')}/${String(month).padStart(2,'0')}/${year}`;
-      list.push({name,verified:rng()>0.08,date,stars:tier.stars,text,item,age,skin,media:null,video:false});
-    }
-  });
-  return list;
-}
-const REVIEWS = REVIEWS_WITH_PHOTOS.concat(buildSyntheticReviews()); // 10 + 94 = 104, matching the real 4.7 (104)
 
 /* ---------- Sort by ---------- */
 const SORT_LABELS={featured:'Featured',newest:'Newest',highest:'Highest Ratings',lowest:'Lowest Ratings'};
@@ -989,7 +841,7 @@ function renderReviews(){
 
   const moreBtn=document.getElementById('showMoreBtn');
   const remaining=currentReviewList.length-revVisible;
-  if(remaining<=0){ moreBtn.textContent='All 104 reviews shown'; moreBtn.disabled=true; }
+  if(remaining<=0){ moreBtn.textContent=`All ${currentReviewList.length} reviews shown`; moreBtn.disabled=true; }
   else{ moreBtn.disabled=false; moreBtn.textContent=`Show more reviews (${remaining} left)`; }
 }
 function showMoreReviews(){ revVisible=Math.min(currentReviewList.length, revVisible+12); renderReviews(); }
@@ -1021,10 +873,12 @@ function closeReview(){ document.getElementById('revModalOverlay').classList.rem
 
 /* ---------- Init ---------- */
 initGallery();
+goToSlide(FLAVOURS[selectedFlavour].g, false); // open on the Party Favor shot, matching the linked variant
 renderOpts();
+renderPicker();
 document.querySelector('.sort-menu button[data-sort="featured"]').classList.add('active');
 renderReviews();
-renderAll();
+renderCartMeta();
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCart();closeReview();closeSortMenu();}});
 </script>
 </body>
