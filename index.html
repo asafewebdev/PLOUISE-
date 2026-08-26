@@ -89,9 +89,6 @@
   .g-arrow:hover{background:rgba(255,255,255,.85)}
   .g-arrow:active{transform:translateY(-50%) scale(.92)}
   .g-arrow.left{left:10px}.g-arrow.right{right:10px}
-  .thumbs{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-  .thumbs img{width:56px;height:56px;object-fit:cover;border-radius:12px;cursor:pointer;border:2px solid transparent;background:#f4cdd8}
-  .thumbs img.active{border-color:#e07898}
   @media(min-width:600px){
     .main-media{border-radius:22px}
     .badge-tl{top:16px;left:16px;gap:8px}
@@ -100,8 +97,6 @@
     .g-arrow{width:42px;height:42px}
     .g-arrow svg{width:20px;height:20px}
     .g-arrow.left{left:14px}.g-arrow.right{right:14px}
-    .thumbs{gap:10px;margin-top:14px}
-    .thumbs img{width:70px;height:70px;border-radius:14px}
   }
 
   /* Product info */
@@ -414,7 +409,6 @@
         <div class="gtrack" id="gTrack"></div>
         <div class="rate-bl">★★★★★ 5.0 (6)</div>
       </div>
-      <div class="thumbs" id="thumbs"></div>
     </div>
 
     <!-- Info -->
@@ -644,9 +638,7 @@ function setTrackX(x, animate){
 function goToSlide(k, animate){
   gIdx=(k+GALLERY.length)%GALLERY.length;
   setTrackX(-gIdx*gWidth, animate!==false);
-  renderThumbs();
 }
-function setGallery(k){ goToSlide(k); }
 function galleryStep(d){ goToSlide(gIdx+d); }
 
 function onGPointerDown(e){
@@ -668,14 +660,6 @@ function onGPointerUp(){
   else if(gDragX>=threshold) galleryStep(-1);
   else goToSlide(gIdx);
 }
-function renderThumbs(){
-  const t=document.getElementById('thumbs');
-  if(!t.childElementCount){
-    t.innerHTML=GALLERY.map((u,k)=>`<img src="${u}" onclick="setGallery(${k})" alt="view ${k+1}">`).join('');
-  }
-  [...t.children].forEach((img,k)=>img.classList.toggle('active', k===gIdx));
-}
-
 /* ---------- Cart state ---------- */
 const cart = {}; // flavour index -> qty already added to the bag
 
