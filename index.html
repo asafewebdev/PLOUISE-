@@ -148,10 +148,10 @@
   .bundle-msg.locked{color:#a06a80}
   @media(min-width:600px){.bundle-msg{font-size:14px}}
 
-  .qty-stepper{display:inline-flex;align-items:center;background:var(--pink-deep);border-radius:20px;overflow:hidden;box-shadow:0 3px 8px rgba(180,90,120,.35)}
-  .qty-stepper button{border:none;background:none;width:34px;height:34px;font-size:16px;font-weight:800;color:#fff;cursor:pointer;font-family:inherit;line-height:1}
+  .qty-stepper{display:inline-flex;align-items:center;height:54px;flex-shrink:0;background:var(--pink-deep);border-radius:27px;overflow:hidden;box-shadow:0 3px 8px rgba(180,90,120,.35)}
+  .qty-stepper button{border:none;background:none;width:42px;height:100%;font-size:18px;font-weight:800;color:#fff;cursor:pointer;font-family:inherit;line-height:1}
   .qty-stepper button:active{background:rgba(0,0,0,.12)}
-  .qty-stepper .qv{min-width:24px;text-align:center;font-weight:800;font-size:14px;color:#fff}
+  .qty-stepper .qv{min-width:26px;text-align:center;font-weight:800;font-size:15px;color:#fff}
   .addbag{margin-top:16px;width:100%;background:var(--green);color:#fff;border:none;border-radius:30px;padding:18px;font-size:16.5px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 8px 20px rgba(37,194,116,.35);transition:filter .15s,transform .05s}
   .addbag:hover{filter:brightness(1.03)}
   .addbag:active{transform:translateY(1px)}
@@ -402,20 +402,18 @@
         <div class="opts" id="opts"></div>
       </div>
 
-      <div class="qty-row" style="display:flex;align-items:center;gap:14px;margin-top:18px">
-        <span style="font-weight:700;font-size:14px">Quantity</span>
-        <div class="qty-stepper">
-          <button onclick="qtyDec()" aria-label="decrease quantity">−</button>
-          <span class="qv" id="qtyVal">1</span>
-          <button onclick="qtyInc()" aria-label="increase quantity">+</button>
-        </div>
-      </div>
-
       <div class="bundle-msg" id="bundleMsg">
         <span class="save">You save £8.00 vs buying separately 🎉</span>
       </div>
 
-      <button class="addbag" id="addBag" onclick="onAddBag()">Add to bag · £17.00</button>
+      <div class="qty-row" style="display:flex;align-items:center;gap:12px;margin-top:16px">
+        <div class="qty-stepper" role="group" aria-label="Quantity">
+          <button onclick="qtyDec()" aria-label="decrease quantity">−</button>
+          <span class="qv" id="qtyVal">1</span>
+          <button onclick="qtyInc()" aria-label="increase quantity">+</button>
+        </div>
+        <button class="addbag" id="addBag" onclick="onAddBag()" style="flex:1;margin-top:0">Add to bag · £17.00</button>
+      </div>
       <p style="margin-top:10px;font-size:12.5px;font-weight:600;color:var(--green-dark);text-align:center">✓ Free UK delivery on your first order, then on orders over £29</p>
 
       <!-- Accordions -->
@@ -565,7 +563,7 @@ const WORTH = 25.00;     // stated bundle value ("Worth £25")
 /* g = index into GALLERY of this flavour's photo, so picking a flavour
    jumps the main gallery straight to its packaging shot. */
 const FLAVOURS = [
- {n:"Sweet Treats", i:"3_for_20_N3_Shopify.jpg?v=1786971978", g:6, blurb:"Donut, Candy Bears & Brown Sugar · A sugary trio made for a serious sweet tooth."},
+ {n:"Sweet Treats", i:"3_for_20_N3_Shopify.jpg?v=1786971978", g:6, blurb:"Donut, Candy Bears & Brown Sugar · A sugary trio made for a serious sweet tooth.", unavailable:true},
  {n:"Fruit Crush", i:"3for_20V2Shopify.jpg?v=1786106709", g:0, blurb:"Raspberry, Winter Apple & Watermelon · Fresh, juicy and bursting with fruity goodness."},
  {n:"Summer Fruits", i:"3_for_20_N2_Shopify.jpg?v=1786971978", g:3, blurb:"Raspberry, Watermelon & Fruit Loops · Fruity favourites meet sweet shop nostalgia."},
  {n:"Baked & Boujee", i:"3for_20V4Shopify.jpg?v=1786106709", g:1, blurb:"Birthday Cake, Hot Toddy & Donut · Warm, sweet and fresh from the P.Louise bakery."},
@@ -644,9 +642,12 @@ function money(v){return "£"+v.toFixed(2);}
 function renderOpts(){
   const box=document.getElementById('opts');
   box.innerHTML=FLAVOURS.map((f,idx)=>{
-    const cls=['opt']; if(idx===selectedFlavour)cls.push('selected');
+    const cls=['opt']; if(idx===selectedFlavour)cls.push('selected'); if(f.unavailable)cls.push('unavailable');
     return `<div class="${cls.join(' ')}" id="opt${idx}" onclick="selectFlavour(${idx})">
-      <div class="circ"><img loading="lazy" src="${f.img}" alt="${f.n.replace(/"/g,'&quot;')}"></div>
+      <div class="circ">
+        <img loading="lazy" src="${f.img}" alt="${f.n.replace(/"/g,'&quot;')}">
+        ${f.unavailable?'<span class="soldout">Sold out</span>':''}
+      </div>
       <div class="oname">${f.n}</div>
     </div>`;
   }).join('');
@@ -663,10 +664,19 @@ function qtyDec(){ pickQty=Math.max(1,pickQty-1); renderPicker(); }
 /* ---------- Render picker preview (before adding to bag) ---------- */
 function renderPicker(){
   document.getElementById('qtyVal').textContent=pickQty;
+  const f=FLAVOURS[selectedFlavour];
   const total=UNIT*pickQty;
   const save=(WORTH-UNIT)*pickQty;
-  document.getElementById('bundleMsg').innerHTML=`<span class="save">You save ${money(save)} vs buying separately 🎉</span>`;
-  document.getElementById('addBag').textContent=`Add to bag · ${money(total)}`;
+  const btn=document.getElementById('addBag');
+  if(f.unavailable){
+    document.getElementById('bundleMsg').innerHTML=`<span class="save">${f.n} is currently sold out · try another flavour!</span>`;
+    btn.textContent='Sold out';
+    btn.disabled=true;
+  }else{
+    document.getElementById('bundleMsg').innerHTML=`<span class="save">You save ${money(save)} vs buying separately 🎉</span>`;
+    btn.textContent=`Add to bag · ${money(total)}`;
+    btn.disabled=false;
+  }
 }
 
 /* ---------- Cart count + drawer ---------- */
@@ -724,6 +734,7 @@ function renderDrawer(){
 function openCart(){renderDrawer();document.getElementById('drawer').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function closeCart(){document.getElementById('drawer').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function onAddBag(){
+  if(FLAVOURS[selectedFlavour].unavailable){ toast('This flavour is sold out'); return; }
   cart[selectedFlavour]=(cart[selectedFlavour]||0)+pickQty;
   renderCartMeta();
   openCart();
