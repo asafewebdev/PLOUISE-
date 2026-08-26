@@ -402,9 +402,7 @@
         <div class="opts" id="opts"></div>
       </div>
 
-      <div class="bundle-msg" id="bundleMsg">
-        <span class="save">You save £8.00 vs buying separately 🎉</span>
-      </div>
+      <div class="bundle-msg" id="bundleMsg"></div>
 
       <div class="qty-row" style="display:flex;align-items:center;gap:12px;margin-top:16px">
         <div class="qty-stepper" role="group" aria-label="Quantity">
@@ -666,14 +664,13 @@ function renderPicker(){
   document.getElementById('qtyVal').textContent=pickQty;
   const f=FLAVOURS[selectedFlavour];
   const total=UNIT*pickQty;
-  const save=(WORTH-UNIT)*pickQty;
   const btn=document.getElementById('addBag');
   if(f.unavailable){
     document.getElementById('bundleMsg').innerHTML=`<span class="save">${f.n} is currently sold out · try another flavour!</span>`;
     btn.textContent='Sold out';
     btn.disabled=true;
   }else{
-    document.getElementById('bundleMsg').innerHTML=`<span class="save">You save ${money(save)} vs buying separately 🎉</span>`;
+    document.getElementById('bundleMsg').innerHTML='';
     btn.textContent=`Add to bag · ${money(total)}`;
     btn.disabled=false;
   }
