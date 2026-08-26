@@ -410,7 +410,7 @@
           <span class="qv" id="qtyVal">1</span>
           <button onclick="qtyInc()" aria-label="increase quantity">+</button>
         </div>
-        <button class="addbag" id="addBag" onclick="onAddBag()" style="flex:1;margin-top:0">Add to bag · £17.00</button>
+        <button class="addbag" id="addBag" onclick="onAddBag()" style="flex:1;margin-top:0">ADD TO CART</button>
       </div>
       <p style="margin-top:10px;font-size:12.5px;font-weight:600;color:var(--green-dark);text-align:center">✓ Free UK delivery on your first order, then on orders over £29</p>
 
@@ -663,15 +663,14 @@ function qtyDec(){ pickQty=Math.max(1,pickQty-1); renderPicker(); }
 function renderPicker(){
   document.getElementById('qtyVal').textContent=pickQty;
   const f=FLAVOURS[selectedFlavour];
-  const total=UNIT*pickQty;
   const btn=document.getElementById('addBag');
   if(f.unavailable){
     document.getElementById('bundleMsg').innerHTML=`<span class="save">${f.n} is currently sold out · try another flavour!</span>`;
-    btn.textContent='Sold out';
+    btn.textContent='SOLD OUT';
     btn.disabled=true;
   }else{
     document.getElementById('bundleMsg').innerHTML='';
-    btn.textContent=`Add to bag · ${money(total)}`;
+    btn.textContent='ADD TO CART';
     btn.disabled=false;
   }
 }
