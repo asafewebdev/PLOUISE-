@@ -786,9 +786,11 @@ function confettiHTML(){
 const GIFT_THRESHOLD=50;
 const GIFT_IMG=TRIO_CDN+"3_for_20_N1_Shopify.jpg?v=1786971978"; // neutral lifestyle shot, not tied to one flavour
 let giftDismissed=false;
+const SHIP_SEGMENT=22; // % of the bar that's "pre-filled" for the always-true first-order shipping perk
 function renderCartProgress(total){
   const giftOn=total>=GIFT_THRESHOLD;
-  const fillPct=Math.min(total,GIFT_THRESHOLD)/GIFT_THRESHOLD*100;
+  const giftProgress=Math.min(total,GIFT_THRESHOLD)/GIFT_THRESHOLD;
+  const fillPct=SHIP_SEGMENT+(100-SHIP_SEGMENT)*giftProgress;
   const headline="✓ Free shipping unlocked on your first order!";
   const sub=giftOn
     ? "You've also unlocked your free Mystery Crystal gift! 🎉"
@@ -808,7 +810,7 @@ function renderCartProgress(total){
       <div class="cp-bar-wrap">
         <div class="cp-bar-track">
           <div class="cp-bar-fill" style="width:${fillPct}%"></div>
-          <div class="cp-node done" style="left:0%;transform:translate(-50%,-50%)">✓</div>
+          <div class="cp-node done" style="left:${SHIP_SEGMENT}%;transform:translate(-50%,-50%)">✓</div>
           <div class="cp-node ${giftOn?'done':''}" style="left:100%;transform:translate(-100%,-50%)">${giftOn?'✓':''}</div>
         </div>
       </div>
