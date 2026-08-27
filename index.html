@@ -340,15 +340,12 @@
   .drawer-foot .tot{display:flex;justify-content:space-between;font-size:19px;font-weight:800;margin:8px 0 4px}
   .drawer-foot .savenote{font-size:12px;color:var(--green-dark);font-weight:700;margin-bottom:14px}
 
-  /* Cart progress — free shipping (always on, first order) + a £50 spend
-     goal for a free mystery gift, shown between the drawer header and items. */
+  /* Cart progress — free shipping banner, always shown complete since it's
+     a first-order fact, not a spend goal. */
   .cart-progress{padding:14px 18px 16px;border-bottom:1px solid #f0e2da}
   .cp-top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
   .cp-icons{display:flex;flex-shrink:0}
-  .cp-icon{position:relative;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;background:#fdeef2;border:2px solid #fff;box-shadow:0 0 0 1px #f0dde4;transition:filter .2s,opacity .2s,background .2s;color:#c07a94;overflow:hidden}
-  .cp-icon img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-  .cp-icon-gift{margin-left:-10px;z-index:2}
-  .cp-icon.locked{filter:grayscale(1);opacity:.55}
+  .cp-icon{position:relative;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;background:#fdeef2;border:2px solid #fff;box-shadow:0 0 0 1px #f0dde4;color:#c07a94;overflow:hidden}
   .cp-icon.unlocked{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff}
   .cp-msg{flex:1;min-width:0}
   .cp-headline{font-size:13px;font-weight:800;color:#241a17;line-height:1.3}
@@ -363,8 +360,6 @@
   .cp-label{font-size:10.5px;font-weight:700;color:var(--muted)}
   .cp-label.done{color:var(--green-dark)}
 
-  .gift-box{background:#f4c9d7}
-  .gift-box img{width:100%;height:100%;object-fit:cover}
 
   .ship-confetti{position:absolute;left:18px;top:18px;width:1px;height:1px;pointer-events:none}
   .ship-confetti i{position:absolute;left:0;top:0;width:6px;height:6px;border-radius:1.5px;opacity:0;animation:confetti-pop .8s ease-out forwards}
@@ -779,67 +774,38 @@ const CONFETTI_PARTICLES=[
 function confettiHTML(){
   return CONFETTI_PARTICLES.map(p=>`<i style="background:${p.c};animation-delay:${p.delay};--dx:${p.dx};--dy:${p.dy};--rot:${p.rot}"></i>`).join('');
 }
-/* Reward milestones on the cart total: a free mystery gift at £50, then
-   free shipping is a first-order fact (see the Delivery information
-   accordion), not something spend unlocks — so its node sits pre-completed
-   at the start of the bar; only the £50 gift is an actual spend goal. */
-const GIFT_THRESHOLD=50;
-const GIFT_IMG=TRIO_CDN+"3_for_20_N1_Shopify.jpg?v=1786971978"; // neutral lifestyle shot, not tied to one flavour
-let giftDismissed=false;
-const SHIP_SEGMENT=22; // % of the bar that's "pre-filled" for the always-true first-order shipping perk
-function renderCartProgress(total){
-  const giftOn=total>=GIFT_THRESHOLD;
-  const giftProgress=Math.min(total,GIFT_THRESHOLD)/GIFT_THRESHOLD;
-  const fillPct=SHIP_SEGMENT+(100-SHIP_SEGMENT)*giftProgress;
-  const headline="✓ Free shipping unlocked on your first order!";
-  const sub=giftOn
-    ? "You've also unlocked your free Mystery Crystal gift! 🎉"
-    : `Spend ${money(GIFT_THRESHOLD-total)} more to unlock a free Mystery Crystal gift!`;
+/* Free shipping is a first-order fact (see the Delivery information
+   accordion), not a spend goal — so this always renders as fully complete. */
+function renderCartProgress(){
   document.getElementById('cartProgress').innerHTML=`
     <div class="cart-progress">
       <div class="cp-top">
         <div class="cp-icons">
-          <div class="cp-icon cp-icon-truck unlocked">🚚</div>
-          <div class="cp-icon cp-icon-gift ${giftOn?'unlocked':'locked'}"><img src="${GIFT_IMG}" alt="">${giftOn?`<span class="ship-confetti">${confettiHTML()}</span>`:''}</div>
+          <div class="cp-icon cp-icon-truck unlocked">🚚<span class="ship-confetti">${confettiHTML()}</span></div>
         </div>
         <div class="cp-msg">
-          <div class="cp-headline on">${headline}</div>
-          <div class="cp-sub">${sub}</div>
+          <div class="cp-headline on">✓ Free shipping unlocked on your first order!</div>
+          <div class="cp-sub">Standard delivery included, no minimum spend.</div>
         </div>
       </div>
       <div class="cp-bar-wrap">
         <div class="cp-bar-track">
-          <div class="cp-bar-fill" style="width:${fillPct}%"></div>
-          <div class="cp-node done" style="left:${SHIP_SEGMENT}%;transform:translate(-50%,-50%)">✓</div>
-          <div class="cp-node ${giftOn?'done':''}" style="left:100%;transform:translate(-100%,-50%)">${giftOn?'✓':''}</div>
+          <div class="cp-bar-fill" style="width:100%"></div>
+          <div class="cp-node done" style="left:100%;transform:translate(-100%,-50%)">✓</div>
         </div>
       </div>
       <div class="cp-labels">
         <span class="cp-label done">Free shipping · your first order</span>
-        <span class="cp-label ${giftOn?'done':''}">Free Mystery Crystal gift · £${GIFT_THRESHOLD}</span>
       </div>
     </div>`;
 }
-function dismissGift(){ giftDismissed=true; renderDrawer(); }
 function renderDrawer(){
   const body=document.getElementById('drawerBody');
   const chosen=Object.keys(cart);
   const units=cartUnits();
   const total=units*UNIT;
-  if(total<GIFT_THRESHOLD) giftDismissed=false; // re-arm once they drop back below
 
   let html='';
-  if(total>=GIFT_THRESHOLD && !giftDismissed){
-    html+=`<div class="citem gift-item">
-      <div class="cimg gift-box"><img src="${GIFT_IMG}" alt=""></div>
-      <div>
-        <div class="cname">Crystal Mystery Bad Bitch Lip Duo</div>
-        <div class="cprice" style="color:var(--green-dark);font-weight:700">100% off</div>
-        <button class="cremove" onclick="dismissGift()">Remove</button>
-      </div>
-      <div style="font-weight:700;font-size:14px">£0.00</div>
-    </div>`;
-  }
   if(chosen.length===0){
     html+='<div class="cart-empty">Your bag is empty.<br>Add a Treat Trio to get started.</div>';
   }else{
@@ -863,7 +829,7 @@ function renderDrawer(){
   }
   body.innerHTML=html;
 
-  renderCartProgress(total);
+  renderCartProgress();
   const worth=units*WORTH;
   document.getElementById('footItems').textContent=units;
   document.getElementById('footStd').textContent=money(worth);
