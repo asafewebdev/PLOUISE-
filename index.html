@@ -179,26 +179,48 @@
 
   /* Reviews */
   .reviews{background:#fff;padding:36px 0}
-  .rev-head{text-align:center;margin-bottom:26px}
-  .rev-star-big{display:inline-flex;align-items:center;gap:10px;font-size:38px;font-weight:800;color:#241a17}
-  .rev-star-big .s{color:var(--gold);font-size:32px}
-  .rev-count{font-size:17px;font-weight:600;margin-top:6px}
-  .dist{max-width:340px;margin:20px auto 0}
+  .rev-head{margin-bottom:26px}
+
+  /* Trust summary card — Trustpilot-style layout (score + sub-scores + rating
+     distribution), built in P.Louise's own palette since these 67 reviews
+     aren't actually sourced from Trustpilot; see index.html history for why. */
+  .trust-card{background:#fff;border:1px solid #f0e2da;border-radius:20px;padding:24px 20px;max-width:760px;margin:0 auto;box-shadow:0 6px 24px rgba(180,90,120,.08)}
+  .trust-title{font-size:18px;font-weight:800;color:#241a17;text-align:center;margin-bottom:20px}
+  .trust-grid{display:flex;flex-direction:column;gap:22px}
+  .trust-score{text-align:center}
+  .trust-big{display:flex;align-items:baseline;justify-content:center;gap:6px}
+  .trust-big .ts-num{font-size:36px;font-weight:800;color:#241a17}
+  .trust-big .ts-of{font-size:15px;font-weight:600;color:var(--muted)}
+  .trust-stars{color:var(--gold);font-size:18px;letter-spacing:2px;margin-top:4px}
+  .trust-count{font-size:13.5px;font-weight:600;color:var(--muted);margin-top:4px}
+  .trust-sub{margin-top:16px;display:flex;flex-direction:column;gap:2px;max-width:230px;margin-left:auto;margin-right:auto}
+  .trust-sub-row{display:flex;justify-content:space-between;font-size:13px;padding:9px 0;border-top:1px solid #f0e2da}
+  .trust-sub-row span{color:var(--muted);font-weight:600}
+  .trust-sub-row b{color:#241a17;font-weight:800}
+  .trust-dist{border-top:1px solid #f0e2da;padding-top:18px}
+  .trust-dist-title{font-size:12px;font-weight:700;color:#241a17;margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em}
   .dist-row{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:12px}
-  .dist-row .rs{color:var(--gold);letter-spacing:1px;width:82px;font-size:12px}
+  .dist-row .rs{color:var(--gold);width:70px;font-size:12px;font-weight:700}
   .bar{flex:1;height:9px;background:#eee;border-radius:6px;overflow:hidden}
   .bar>i{display:block;height:100%;background:#8a8a8a;border-radius:6px}
-  .dist-row .n{width:30px;color:var(--muted);text-align:right}
+  .dist-row .n{width:34px;color:var(--muted);text-align:right}
   @media(min-width:600px){
     .reviews{padding:56px 0}
     .rev-head{margin-bottom:30px}
-    .rev-star-big{gap:12px;font-size:52px}
-    .rev-star-big .s{font-size:44px}
-    .rev-count{font-size:20px}
-    .dist{max-width:420px;margin:24px auto 0}
     .dist-row{gap:12px;font-size:13px}
-    .dist-row .rs{width:96px;font-size:13px}
-    .dist-row .n{width:34px}
+    .dist-row .rs{width:82px;font-size:13px}
+  }
+  @media(min-width:720px){
+    .trust-card{padding:30px 34px}
+    .trust-title{font-size:19px;margin-bottom:24px}
+    .trust-grid{flex-direction:row;align-items:stretch;gap:34px}
+    .trust-score{flex:0 0 210px;text-align:left;border-right:1px solid #f0e2da;padding-right:28px}
+    .trust-big{justify-content:flex-start}
+    .trust-big .ts-num{font-size:40px}
+    .trust-stars{text-align:left}
+    .trust-count{text-align:left}
+    .trust-sub{margin-left:0;margin-right:0;max-width:none}
+    .trust-dist{flex:1;border-top:none;padding-top:0}
   }
 
   /* Sort by dropdown */
@@ -471,14 +493,27 @@
 <section class="reviews" id="reviews">
   <div class="wrap">
     <div class="rev-head">
-      <div class="rev-star-big"><span class="s">★</span>4.8</div>
-      <div class="rev-count">67 Reviews</div>
-      <div class="dist">
-        <div class="dist-row"><span class="rs">★★★★★</span><div class="bar"><i style="width:81%"></i></div><span class="n">(54)</span></div>
-        <div class="dist-row"><span class="rs">★★★★☆</span><div class="bar"><i style="width:19%"></i></div><span class="n">(13)</span></div>
-        <div class="dist-row"><span class="rs">★★★☆☆</span><div class="bar"><i style="width:0%"></i></div><span class="n">(0)</span></div>
-        <div class="dist-row"><span class="rs">★★☆☆☆</span><div class="bar"><i style="width:0%"></i></div><span class="n">(0)</span></div>
-        <div class="dist-row"><span class="rs">★☆☆☆☆</span><div class="bar"><i style="width:0%"></i></div><span class="n">(0)</span></div>
+      <div class="trust-card">
+        <h2 class="trust-title">Customer Reviews</h2>
+        <div class="trust-grid">
+          <div class="trust-score">
+            <div class="trust-big"><span class="ts-num">4.8</span><span class="ts-of">/ 5</span></div>
+            <div class="trust-stars">★★★★★</div>
+            <div class="trust-count">67 reviews</div>
+            <div class="trust-sub">
+              <div class="trust-sub-row"><span>Quality</span><b>4.7 / 5</b></div>
+              <div class="trust-sub-row"><span>Value for money</span><b>4.6 / 5</b></div>
+            </div>
+          </div>
+          <div class="trust-dist">
+            <div class="trust-dist-title">Rating distribution</div>
+            <div class="dist-row"><span class="rs">Excellent</span><div class="bar"><i style="width:81%"></i></div><span class="n">81%</span></div>
+            <div class="dist-row"><span class="rs">Great</span><div class="bar"><i style="width:19%"></i></div><span class="n">19%</span></div>
+            <div class="dist-row"><span class="rs">Average</span><div class="bar"><i style="width:0%"></i></div><span class="n">0%</span></div>
+            <div class="dist-row"><span class="rs">Poor</span><div class="bar"><i style="width:0%"></i></div><span class="n">0%</span></div>
+            <div class="dist-row"><span class="rs">Bad</span><div class="bar"><i style="width:0%"></i></div><span class="n">0%</span></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -773,7 +808,7 @@ const REVIEWS=[
  {name:"Aimee O.",verified:true,date:"21/08/2026",stars:4,text:"Great quality overall, just a touch smaller than I'd pictured in my head.",item:"Sweet Treats",age:"35 to 44",skin:"Oily",media:null,video:false},
  {name:"Shannon E.",verified:true,date:"21/08/2026",stars:4,text:"Ordered on a whim, mostly glad I did, though I wish there'd been a tracking update.",item:"Fruit Crush",age:"45 to 54",skin:"Combination",media:null,video:false},
  {name:"Tia Y.",verified:true,date:"20/08/2026",stars:5,text:"Smells like a bakery in the best way possible.",item:"Summer Fruits",age:"18 to 24",skin:"Normal",media:null,video:false},
- {name:"Molly Q.",verified:true,date:"20/08/2026",stars:5,text:"Such a treat to unbox, feels really luxe.",item:"Baked & Boujee",age:"25 to 34",skin:"Dry",media:null,video:false},
+ {name:"Molly Q.",verified:true,date:"20/08/2026",stars:5,text:"Loved opening this, the packaging is so nice.",item:"Baked & Boujee",age:"25 to 34",skin:"Dry",media:null,video:false},
  {name:"Erin Z.",verified:true,date:"20/08/2026",stars:5,text:"Already thinking about which flavour to try next.",item:"Choc Berry Bliss",age:"35 to 44",skin:"Oily",media:null,video:false},
  {name:"Zoe I.",verified:true,date:"20/08/2026",stars:5,text:"The body mist is stronger than I expected, in a good way.",item:"Party Favor",age:"45 to 54",skin:"Combination",media:null,video:false},
  {name:"Casey U.",verified:true,date:"19/08/2026",stars:4,text:"Bought two, one for me and one to gift, the gift one turned up a day later than the tracking said.",item:"Sweet Treats",age:"18 to 24",skin:"Normal",media:null,video:false},
@@ -782,24 +817,24 @@ const REVIEWS=[
  {name:"Connor D.",verified:true,date:"19/08/2026",stars:5,text:"This smells so good I don't want to use it all.",item:"Baked & Boujee",age:"45 to 54",skin:"Combination",media:null,video:false},
  {name:"Liam S.",verified:true,date:"18/08/2026",stars:5,text:"My go-to gift for friends now.",item:"Choc Berry Bliss",age:"18 to 24",skin:"Normal",media:null,video:false},
  {name:"Callum R.",verified:true,date:"18/08/2026",stars:5,text:"Impressed with how soft the lip products feel.",item:"Party Favor",age:"25 to 34",skin:"Dry",media:null,video:false},
- {name:"Josh T.",verified:true,date:"18/08/2026",stars:5,text:"Great little pick me up purchase.",item:"Sweet Treats",age:"35 to 44",skin:"Oily",media:null,video:false},
+ {name:"Josh T.",verified:true,date:"18/08/2026",stars:5,text:"Bought this as a little treat for myself and I love it.",item:"Sweet Treats",age:"35 to 44",skin:"Oily",media:null,video:false},
  {name:"Kieran B.",verified:true,date:"18/08/2026",stars:5,text:"The whole set feels really put together, not just thrown in a box.",item:"Fruit Crush",age:"45 to 54",skin:"Combination",media:null,video:false},
  {name:"Dylan H.",verified:true,date:"17/08/2026",stars:5,text:"Bought after seeing it everywhere online, worth the hype.",item:"Summer Fruits",age:"18 to 24",skin:"Normal",media:null,video:false},
  {name:"Reece W.",verified:true,date:"17/08/2026",stars:5,text:"Nice surprise how big the lip duo actually is.",item:"Baked & Boujee",age:"25 to 34",skin:"Dry",media:null,video:false},
  {name:"Nicole A.",verified:true,date:"17/08/2026",stars:5,text:"This is the one I keep recommending to anyone who says they don't 'do' skincare sets.",item:"Choc Berry Bliss",age:"35 to 44",skin:"Oily",media:null,video:false},
  {name:"Paige F.",verified:true,date:"16/08/2026",stars:5,text:"My skin's been loving the moisturiser from this.",item:"Party Favor",age:"45 to 54",skin:"Combination",media:null,video:false},
- {name:"Courtney N.",verified:true,date:"16/08/2026",stars:5,text:"The trio works so well together, smells layered nicely.",item:"Sweet Treats",age:"18 to 24",skin:"Normal",media:null,video:false},
+ {name:"Courtney N.",verified:true,date:"16/08/2026",stars:5,text:"Love all three together, the scents actually go really well.",item:"Sweet Treats",age:"18 to 24",skin:"Normal",media:null,video:false},
  {name:"Faye G.",verified:true,date:"16/08/2026",stars:4,text:"Ordered this as a birthday present, arrived in time but the box looked a little worn on arrival.",item:"Fruit Crush",age:"25 to 34",skin:"Dry",media:null,video:false},
  {name:"Rhian C.",verified:true,date:"16/08/2026",stars:5,text:"Checked the individual prices after ordering and was genuinely shocked how much cheaper this worked out.",item:"Summer Fruits",age:"35 to 44",skin:"Oily",media:null,video:false},
  {name:"Kayleigh L.",verified:true,date:"15/08/2026",stars:5,text:"Every item smells amazing, not just one standout.",item:"Baked & Boujee",age:"45 to 54",skin:"Combination",media:null,video:false},
  {name:"Kirsty P.",verified:true,date:"15/08/2026",stars:5,text:"This is my third order, still obsessed.",item:"Choc Berry Bliss",age:"18 to 24",skin:"Normal",media:null,video:false},
  {name:"Abbie J.",verified:true,date:"15/08/2026",stars:5,text:"The cleanser smells incredible, wasn't expecting to love it this much.",item:"Party Favor",age:"25 to 34",skin:"Dry",media:null,video:false},
- {name:"Jasmine V.",verified:true,date:"15/08/2026",stars:4,text:"Good for treating yourself without breaking the bank, wish there were a couple more grams in the mist.",item:"Sweet Treats",age:"35 to 44",skin:"Oily",media:null,video:false},
+ {name:"Jasmine V.",verified:true,date:"15/08/2026",stars:4,text:"Really good for the price, just wish the body mist was a bit bigger.",item:"Sweet Treats",age:"35 to 44",skin:"Oily",media:null,video:false},
  {name:"Demi O.",verified:true,date:"14/08/2026",stars:4,text:"Everything was wrapped nicely inside, just took a bit longer to arrive than I'd expected.",item:"Fruit Crush",age:"45 to 54",skin:"Combination",media:null,video:false},
  {name:"Charlotte E.",verified:true,date:"14/08/2026",stars:5,text:"The lip oil is so glossy without being sticky.",item:"Summer Fruits",age:"18 to 24",skin:"Normal",media:null,video:false},
  {name:"Kelly Y.",verified:true,date:"14/08/2026",stars:5,text:"Honestly better than some full price sets I've bought.",item:"Baked & Boujee",age:"25 to 34",skin:"Dry",media:null,video:false},
  {name:"Leah Q.",verified:true,date:"14/08/2026",stars:5,text:"Bought as a stocking filler, might just keep it for me.",item:"Choc Berry Bliss",age:"35 to 44",skin:"Oily",media:null,video:false},
- {name:"Rachel Z.",verified:true,date:"13/08/2026",stars:5,text:"This whole set smells like a treat shop.",item:"Party Favor",age:"45 to 54",skin:"Combination",media:null,video:false},
+ {name:"Rachel Z.",verified:true,date:"13/08/2026",stars:5,text:"Everything smells so sweet, I wasn't expecting to like all three this much.",item:"Party Favor",age:"45 to 54",skin:"Combination",media:null,video:false},
  {name:"Hannah I.",verified:true,date:"13/08/2026",stars:4,text:"My friend recommended this, mostly agree though the scent is stronger than she made out.",item:"Sweet Treats",age:"18 to 24",skin:"Normal",media:null,video:false},
  {name:"Katie U.",verified:true,date:"13/08/2026",stars:5,text:"Still using all three, months on, that's rare for me with a set like this.",item:"Fruit Crush",age:"25 to 34",skin:"Dry",media:null,video:false},
  {name:"Georgia K.",verified:true,date:"13/08/2026",stars:4,text:"The mist lasts well on my skin, just wish the lip duo lasted half as long.",item:"Summer Fruits",age:"35 to 44",skin:"Oily",media:null,video:false},
@@ -816,7 +851,7 @@ const REVIEWS=[
  {name:"Sienna N.",verified:true,date:"10/08/2026",stars:5,text:"Smells so good I keep sniffing my wrist.",item:"Fruit Crush",age:"25 to 34",skin:"Dry",media:null,video:false},
  {name:"Darcie G.",verified:true,date:"10/08/2026",stars:4,text:"Good size products, not the sample sizes I expected.",item:"Summer Fruits",age:"35 to 44",skin:"Oily",media:null,video:false},
  {name:"Bella C.",verified:true,date:"09/08/2026",stars:5,text:"Bought this on a payday treat and no regrets.",item:"Baked & Boujee",age:"45 to 54",skin:"Combination",media:null,video:false},
- {name:"Phoebe L.",verified:true,date:"09/08/2026",stars:5,text:"The whole trio smells cohesive, like it was made to go together.",item:"Choc Berry Bliss",age:"18 to 24",skin:"Normal",media:null,video:false},
+ {name:"Phoebe L.",verified:true,date:"09/08/2026",stars:5,text:"All three scents go so well together, none of them clash.",item:"Choc Berry Bliss",age:"18 to 24",skin:"Normal",media:null,video:false},
  {name:"Alice J.",verified:true,date:"09/08/2026",stars:5,text:"Went in expecting a lip balm and a spray, ended up with way more than that.",item:"Party Favor",age:"25 to 34",skin:"Dry",media:null,video:false},
  {name:"Elena V.",verified:true,date:"08/08/2026",stars:5,text:"Already added another flavour to my basket.",item:"Sweet Treats",age:"35 to 44",skin:"Oily",media:null,video:false}
 ];
