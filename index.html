@@ -340,9 +340,31 @@
   .drawer-foot .tot{display:flex;justify-content:space-between;font-size:19px;font-weight:800;margin:8px 0 4px}
   .drawer-foot .savenote{font-size:12px;color:var(--green-dark);font-weight:700;margin-bottom:14px}
 
-  .ship-unlocked{position:relative;display:flex;align-items:center;gap:10px;background:#eaf7ee;border:1px solid #c7e9d2;color:var(--green-dark);font-weight:700;font-size:12.5px;line-height:1.35;padding:10px 12px;border-radius:14px;margin-bottom:14px}
-  .ship-badge{position:relative;flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900}
-  .ship-confetti{position:absolute;left:18px;top:16px;width:1px;height:1px;pointer-events:none}
+  /* Cart progress — two-milestone reward bar (free gift at £50, free Next
+     Day delivery at £75) shown between the drawer header and the items. */
+  .cart-progress{padding:14px 18px 16px;border-bottom:1px solid #f0e2da}
+  .cp-top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .cp-icons{display:flex;flex-shrink:0}
+  .cp-icon{position:relative;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;background:#fdeef2;border:2px solid #fff;box-shadow:0 0 0 1px #f0dde4;transition:filter .2s,opacity .2s,background .2s;color:#c07a94}
+  .cp-icon-gift{margin-right:-10px;z-index:2}
+  .cp-icon.locked{filter:grayscale(1);opacity:.55}
+  .cp-icon.unlocked{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff}
+  .cp-msg{flex:1;min-width:0}
+  .cp-headline{font-size:13px;font-weight:800;color:#241a17;line-height:1.3}
+  .cp-headline.on{color:var(--green-dark)}
+  .cp-sub{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.3}
+  .cp-bar-wrap{position:relative;margin:0 4px}
+  .cp-bar-track{position:relative;height:7px;background:#f4e0dd;border-radius:5px}
+  .cp-bar-fill{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--green),var(--green-dark));border-radius:5px;transition:width .35s ease}
+  .cp-node{position:absolute;top:50%;width:17px;height:17px;border-radius:50%;background:#fff;border:2px solid #f4c9d7;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:900;transition:border-color .2s,background .2s}
+  .cp-node.done{border-color:var(--green-dark);background:var(--green)}
+  .cp-labels{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:10px;text-align:center}
+  .cp-label{font-size:10.5px;font-weight:700;color:var(--muted)}
+  .cp-label.done{color:var(--green-dark)}
+
+  .gift-box{display:flex;align-items:center;justify-content:center;font-size:24px;background:linear-gradient(135deg,#fbe0e8,#f4c9d7)}
+
+  .ship-confetti{position:absolute;left:18px;top:18px;width:1px;height:1px;pointer-events:none}
   .ship-confetti i{position:absolute;left:0;top:0;width:6px;height:6px;border-radius:1.5px;opacity:0;animation:confetti-pop .8s ease-out forwards}
   @keyframes confetti-pop{
     0%{opacity:1;transform:translate(0,0) rotate(0deg) scale(1)}
@@ -585,11 +607,11 @@
     <h3>Your bag (<span id="drawerCount">0</span>)</h3>
     <button class="close" onclick="closeCart()" aria-label="Close">×</button>
   </div>
+  <div id="cartProgress"></div>
   <div class="drawer-body" id="drawerBody">
     <div class="cart-empty">Your bag is empty.<br>Add any products to get started.</div>
   </div>
   <div class="drawer-foot">
-    <div id="shipUnlocked"></div>
     <div class="line"><span>Items</span><span id="footItems">0</span></div>
     <div class="line"><span>Standard price</span><span id="footStd">£0.00</span></div>
     <div class="tot"><span>Total</span><span id="footTotal">£0.00</span></div>
@@ -755,13 +777,75 @@ const CONFETTI_PARTICLES=[
 function confettiHTML(){
   return CONFETTI_PARTICLES.map(p=>`<i style="background:${p.c};animation-delay:${p.delay};--dx:${p.dx};--dy:${p.dy};--rot:${p.rot}"></i>`).join('');
 }
+/* Reward milestones on the cart total: a free mystery gift at £50, then
+   free Next Day delivery at £75 (standard delivery is already free — see
+   the Delivery information accordion — this is the express-shipping upsell). */
+const GIFT_THRESHOLD=50, NEXTDAY_THRESHOLD=75;
+let giftDismissed=false;
+function renderCartProgress(total){
+  const giftOn=total>=GIFT_THRESHOLD, dayOn=total>=NEXTDAY_THRESHOLD;
+  const giftPct=(GIFT_THRESHOLD/NEXTDAY_THRESHOLD)*100;
+  const fillPct=Math.min(total,NEXTDAY_THRESHOLD)/NEXTDAY_THRESHOLD*100;
+  let headline, sub;
+  if(dayOn){
+    headline="You've unlocked your free gift + free Next Day delivery!";
+    sub="Nothing left to unlock, enjoy the extras 🎉";
+  }else if(giftOn){
+    headline="You've unlocked your free gift!";
+    sub=`Spend ${money(NEXTDAY_THRESHOLD-total)} more for free Next Day delivery!`;
+  }else{
+    headline=`Spend ${money(GIFT_THRESHOLD-total)} more to unlock your free gift!`;
+    sub=`Then ${money(NEXTDAY_THRESHOLD-GIFT_THRESHOLD)} more unlocks free Next Day delivery.`;
+  }
+  document.getElementById('cartProgress').innerHTML=`
+    <div class="cart-progress">
+      <div class="cp-top">
+        <div class="cp-icons">
+          <div class="cp-icon cp-icon-gift ${giftOn?'unlocked':'locked'}">🎁${giftOn?`<span class="ship-confetti">${confettiHTML()}</span>`:''}</div>
+          <div class="cp-icon cp-icon-truck ${dayOn?'unlocked':'locked'}">🚚</div>
+        </div>
+        <div class="cp-msg">
+          <div class="cp-headline ${giftOn?'on':''}">${headline}</div>
+          <div class="cp-sub">${sub}</div>
+        </div>
+      </div>
+      <div class="cp-bar-wrap">
+        <div class="cp-bar-track">
+          <div class="cp-bar-fill" style="width:${fillPct}%"></div>
+          <div class="cp-node ${giftOn?'done':''}" style="left:${giftPct}%;transform:translate(-50%,-50%)">${giftOn?'✓':''}</div>
+          <div class="cp-node ${dayOn?'done':''}" style="left:100%;transform:translate(-100%,-50%)">${dayOn?'✓':''}</div>
+        </div>
+      </div>
+      <div class="cp-labels">
+        <span class="cp-label ${giftOn?'done':''}">Free Mystery Crystal Bad Bitch! £${GIFT_THRESHOLD}</span>
+        <span class="cp-label ${dayOn?'done':''}">Free Next Day delivery £${NEXTDAY_THRESHOLD}</span>
+      </div>
+    </div>`;
+}
+function dismissGift(){ giftDismissed=true; renderDrawer(); }
 function renderDrawer(){
   const body=document.getElementById('drawerBody');
   const chosen=Object.keys(cart);
+  const units=cartUnits();
+  const total=units*UNIT;
+  if(total<GIFT_THRESHOLD) giftDismissed=false; // re-arm once they drop back below
+
+  let html='';
+  if(total>=GIFT_THRESHOLD && !giftDismissed){
+    html+=`<div class="citem gift-item">
+      <div class="cimg gift-box">🎁</div>
+      <div>
+        <div class="cname">Crystal Mystery Bad Bitch Lip Duo</div>
+        <div class="cprice" style="color:var(--green-dark);font-weight:700">100% off</div>
+        <button class="cremove" onclick="dismissGift()">Remove</button>
+      </div>
+      <div style="font-weight:700;font-size:14px">£0.00</div>
+    </div>`;
+  }
   if(chosen.length===0){
-    body.innerHTML='<div class="cart-empty">Your bag is empty.<br>Add a Treat Trio to get started.</div>';
+    html+='<div class="cart-empty">Your bag is empty.<br>Add a Treat Trio to get started.</div>';
   }else{
-    body.innerHTML=chosen.map(idx=>{
+    html+=chosen.map(idx=>{
       const q=cart[idx];const f=FLAVOURS[idx];
       return `<div class="citem">
         <div class="cimg"><img src="${f.img}" alt=""></div>
@@ -779,14 +863,10 @@ function renderDrawer(){
       </div>`;
     }).join('');
   }
-  const units=cartUnits();
-  const total=units*UNIT;
+  body.innerHTML=html;
+
+  renderCartProgress(total);
   const worth=units*WORTH;
-  document.getElementById('shipUnlocked').innerHTML = units>0 ? `
-    <div class="ship-unlocked">
-      <span class="ship-badge">✓<span class="ship-confetti">${confettiHTML()}</span></span>
-      <span>You've unlocked <b>FREE shipping</b> on your first order!</span>
-    </div>` : '';
   document.getElementById('footItems').textContent=units;
   document.getElementById('footStd').textContent=money(worth);
   document.getElementById('footTotal').textContent=money(total);
