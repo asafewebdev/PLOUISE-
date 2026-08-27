@@ -339,6 +339,15 @@
   .drawer-foot .line{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;color:#5a4d48}
   .drawer-foot .tot{display:flex;justify-content:space-between;font-size:19px;font-weight:800;margin:8px 0 4px}
   .drawer-foot .savenote{font-size:12px;color:var(--green-dark);font-weight:700;margin-bottom:14px}
+
+  .ship-unlocked{position:relative;display:flex;align-items:center;gap:10px;background:#eaf7ee;border:1px solid #c7e9d2;color:var(--green-dark);font-weight:700;font-size:12.5px;line-height:1.35;padding:10px 12px;border-radius:14px;margin-bottom:14px}
+  .ship-badge{position:relative;flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900}
+  .ship-confetti{position:absolute;left:18px;top:16px;width:1px;height:1px;pointer-events:none}
+  .ship-confetti i{position:absolute;left:0;top:0;width:6px;height:6px;border-radius:1.5px;opacity:0;animation:confetti-pop .8s ease-out forwards}
+  @keyframes confetti-pop{
+    0%{opacity:1;transform:translate(0,0) rotate(0deg) scale(1)}
+    100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(.4)}
+  }
   .checkout{width:100%;background:var(--green);color:#fff;border:none;border-radius:26px;padding:16px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer}
   @media(min-width:480px){
     .drawer{width:400px;max-width:92vw}
@@ -580,6 +589,7 @@
     <div class="cart-empty">Your bag is empty.<br>Add any products to get started.</div>
   </div>
   <div class="drawer-foot">
+    <div id="shipUnlocked"></div>
     <div class="line"><span>Items</span><span id="footItems">0</span></div>
     <div class="line"><span>Standard price</span><span id="footStd">£0.00</span></div>
     <div class="tot"><span>Total</span><span id="footTotal">£0.00</span></div>
@@ -729,6 +739,22 @@ function cartSet(idx,q){
 }
 function cartInc(idx){ cartSet(idx,(cart[idx]||0)+1); }
 function cartDec(idx){ cartSet(idx,(cart[idx]||0)-1); }
+/* Small celebratory burst for the "free shipping unlocked" badge — fixed,
+   hand-placed particles rather than randomised, so the pop always looks
+   balanced instead of occasionally clumping to one side. */
+const CONFETTI_PARTICLES=[
+ {dx:'-22px',dy:'-14px',rot:'-40deg',c:'var(--gold)',delay:'0s'},
+ {dx:'-10px',dy:'-24px',rot:'20deg',c:'var(--pink-deep)',delay:'.03s'},
+ {dx:'8px',dy:'-25px',rot:'60deg',c:'var(--green)',delay:'.06s'},
+ {dx:'22px',dy:'-12px',rot:'-30deg',c:'var(--lime)',delay:'.09s'},
+ {dx:'24px',dy:'8px',rot:'45deg',c:'var(--pink-mid)',delay:'.12s'},
+ {dx:'14px',dy:'20px',rot:'-15deg',c:'var(--gold)',delay:'.15s'},
+ {dx:'-8px',dy:'22px',rot:'30deg',c:'var(--green)',delay:'.18s'},
+ {dx:'-24px',dy:'6px',rot:'-50deg',c:'var(--pink-deep)',delay:'.21s'}
+];
+function confettiHTML(){
+  return CONFETTI_PARTICLES.map(p=>`<i style="background:${p.c};animation-delay:${p.delay};--dx:${p.dx};--dy:${p.dy};--rot:${p.rot}"></i>`).join('');
+}
 function renderDrawer(){
   const body=document.getElementById('drawerBody');
   const chosen=Object.keys(cart);
@@ -756,6 +782,11 @@ function renderDrawer(){
   const units=cartUnits();
   const total=units*UNIT;
   const worth=units*WORTH;
+  document.getElementById('shipUnlocked').innerHTML = units>0 ? `
+    <div class="ship-unlocked">
+      <span class="ship-badge">✓<span class="ship-confetti">${confettiHTML()}</span></span>
+      <span>You've unlocked <b>FREE shipping</b> on your first order!</span>
+    </div>` : '';
   document.getElementById('footItems').textContent=units;
   document.getElementById('footStd').textContent=money(worth);
   document.getElementById('footTotal').textContent=money(total);
